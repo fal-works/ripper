@@ -17,7 +17,6 @@ using ripper.common.ExprExtension;
 using sneaker.log.MacroLogger;
 using sneaker.format.StringExtension;
 
-
 enum MetadataParameterProcessResult {
 	InvalidType;
 	NotFound;
@@ -112,7 +111,11 @@ class Macro {
 			for (parameter in metadataParameters) {
 				final typeName = ExprTools.toString(parameter);
 				log('Start to process metadata parameter "${typeName}"...');
-				final result = processMetadataParameter(parameter, typeName, localFields);
+				final result = processMetadataParameter(
+					parameter,
+					typeName,
+					localFields
+				);
 
 				switch result {
 					case InvalidType:
