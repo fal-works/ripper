@@ -2,7 +2,9 @@ package ripper.macro;
 
 #if macro
 import haxe.macro.ExprTools;
+#if !ripper_validation_disable
 import ripper.common.ExprExtension.validateDomainName;
+#end
 
 using sneaker.format.StringExtension;
 
@@ -17,7 +19,7 @@ class BodyMacro {
 		final localClass = Context.getLocalClass();
 		if (localClass == null) {
 			warn('Tried to build something that is not a class.');
-			debug('Go to next...');
+			debug('Go to next.');
 			return null;
 		}
 
@@ -96,7 +98,7 @@ class BodyMacro {
 		if (validated == null) return InvalidType;
 		#end
 
-		debug('Searching for type "${parameterString}" ...');
+		debug('Searching type: ${parameterString}');
 
 		final type = findType(parameterString);
 		#if !ripper_validation_disable
@@ -104,14 +106,14 @@ class BodyMacro {
 		#end
 
 		final fullTypeName = TypeTools.toString(type);
-		debug('Found type "${fullTypeName}". Resolving as a class...');
+		debug('Found type "${fullTypeName}". Resolving as a class.');
 		final className = resolveClass(type, fullTypeName);
 
 		#if !ripper_validation_disable
 		if (className == null) return NotClass;
 		#end
 
-		debug('Resolved "${className}" as a class. Start to copy fields...');
+		debug('Resolved "${className}" as a class. Start to copy fields.');
 		final fields = SpiritMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
@@ -122,7 +124,8 @@ class BodyMacro {
 		for (field in fields) {
 			field.pos = Context.currentPos();
 			localFields.push(field);
-			debug('Copied field "${field.name}".');
+			debug('Copied field: ${field.name}');
+			// TODO: duplicate check
 		}
 
 		return Success;
@@ -139,14 +142,16 @@ class BodyMacro {
 
 		for (metadata in metadataArray) {
 			final metadataParameters = metadata.params;
+			#if !ripper_validation_disable
 			if (metadataParameters == null) {
 				warn("Found metadata without arguments.");
-				debug('Go to next...');
+				debug('Go to next.');
 				continue;
 			}
+			#end
 			for (parameter in metadataParameters) {
 				final typeName = ExprTools.toString(parameter);
-				debug('Start to process metadata parameter "${typeName}"...');
+				debug('Start to process metadata parameter: ${typeName}');
 				final result = processMetadataParameter(
 					parameter,
 					typeName,
@@ -165,7 +170,11 @@ class BodyMacro {
 					case NoFields:
 						debug('No fields in "${typeName}".');
 					case Success:
+						#if !ripper_validation_disable
 						info('Copied fields: ${localClassName.sliceAfterLastDot()} <= ${typeName.sliceAfterLastDot()}');
+						#else
+						info('Processed metadata parameter: ${typeName}');
+						#end
 				}
 			}
 		}
