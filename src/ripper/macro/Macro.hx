@@ -7,7 +7,6 @@ import haxe.macro.Context;
 import haxe.macro.Compiler;
 import haxe.macro.Expr;
 import haxe.rtti.Meta;
-import haxe.ds.StringMap;
 import sneaker.log.MacroLogger;
 import sneaker.string_buffer.StringBuffer;
 import sneaker.print.Printer.println;
@@ -17,7 +16,6 @@ using ripper.common.ExprExtension;
 using sneaker.log.MacroLogger;
 using sneaker.format.StringExtension;
 
-typedef BuildMacroResult = Null<Array<Field>>;
 
 enum MetadataParameterProcessResult {
 	InvalidType;
@@ -41,8 +39,6 @@ class Macro {
 		buffer.add(content);
 		println(buffer.toString());
 	}
-
-	static final partials = new StringMap<Array<Field>>();
 
 	static function findTypeStrict(typeName: String): Null<haxe.macro.Type> {
 		try {
@@ -100,7 +96,7 @@ class Macro {
 		#end
 
 		log('Resolved "${className}" as a class. Start to copy fields...');
-		final fields = partials.get(fullTypeName);
+		final fields = SoulMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
 		if (fields == null) return Failure;
@@ -150,19 +146,6 @@ class Macro {
 		return localFields;
 	}
 
-	static function processAsPart(): BuildMacroResult {
-		final localTypePath = TypeTools.toString(Context.getLocalType());
-
-		final localFields = Context.getBuildFields();
-		partials.set(localTypePath, localFields);
-		log('Saved fields in ${localTypePath}.');
-
-		Compiler.exclude(localTypePath, false);
-		log('Excluded ${localTypePath} from compilation.');
-
-		return null;
-	}
-
 	macro public static function process(): BuildMacroResult {
 		log("Start processing.");
 
@@ -178,11 +161,7 @@ class Macro {
 		final result: BuildMacroResult = if (metadataExists) {
 			log("Found metadata.");
 			processAsHost(metadataArray);
-		}
-		else {
-			log("No metadata. Registering as a part...");
-			processAsPart();
-		}
+		} else null;
 
 		log("end processing");
 		return result;
