@@ -1,7 +1,6 @@
 package ripper.macro;
 
 #if macro
-import haxe.macro.Context;
 import sneaker.string_buffer.StringBuffer;
 import sneaker.print.Printer.println;
 

@@ -2,12 +2,8 @@ package ripper.macro;
 
 #if macro
 import haxe.macro.ExprTools;
-import haxe.macro.Context;
-import haxe.macro.Expr;
-import haxe.macro.TypeTools;
-import ripper.macro.Logger.*;
+import ripper.common.ExprExtension.validateDomainName;
 
-using ripper.common.ExprExtension;
 using sneaker.format.StringExtension;
 
 enum MetadataParameterProcessResult {
@@ -56,7 +52,7 @@ class BodyMacro {
 		localFields: Array<Field>
 	): MetadataParameterProcessResult {
 		#if !ripper_validation_disable
-		final validated = parameter.validateDomainName();
+		final validated = validateDomainName(parameter);
 		if (validated == null) return InvalidType;
 		#end
 
