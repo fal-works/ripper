@@ -6,11 +6,7 @@ import haxe.macro.Context;
 import haxe.macro.Compiler;
 import haxe.macro.Expr;
 import haxe.macro.TypeTools;
-import sneaker.print.Printer.println;
-import sneaker.string_buffer.StringBuffer;
 import ripper.macro.Logger.*;
-
-using sneaker.log.MacroLogger;
 
 class SoulMacro {
 	@:persistent public static final fieldsMap = new StringMap<Array<Field>>();

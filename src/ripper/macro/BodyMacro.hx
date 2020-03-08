@@ -1,20 +1,13 @@
 package ripper.macro;
 
 #if macro
-import haxe.macro.PositionTools;
 import haxe.macro.ExprTools;
 import haxe.macro.Context;
-import haxe.macro.Compiler;
 import haxe.macro.Expr;
-import haxe.rtti.Meta;
-import sneaker.log.MacroLogger;
-import sneaker.string_buffer.StringBuffer;
-import sneaker.print.Printer.println;
 import haxe.macro.TypeTools;
 import ripper.macro.Logger.*;
 
 using ripper.common.ExprExtension;
-using sneaker.log.MacroLogger;
 using sneaker.format.StringExtension;
 
 enum MetadataParameterProcessResult {
@@ -138,7 +131,7 @@ class BodyMacro {
 	}
 
 	macro public static function build(): BuildMacroResult {
-		log("Start building Body class.");
+		log("Start to build Body class.");
 
 		final localClass = Context.getLocalClass();
 		if (localClass == null) {
