@@ -23,3 +23,5 @@ Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
 |flag|description|
 |---|---|
 |ripper_validation_disable|Disables all validation during the compilation.|
+|ripper_log_disable|Disables printing logs (excluding the warning compilation message).|
+|ripper_log_debug|Enables printing logs of Debug level.|
