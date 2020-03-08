@@ -6,16 +6,30 @@ import ripper.common.ExprExtension.validateDomainName;
 
 using sneaker.format.StringExtension;
 
-enum MetadataParameterProcessResult {
-	InvalidType;
-	NotFound;
-	NotClass;
-	Failure;
-	NoFields;
-	Success;
-}
-
 class BodyMacro {
+	macro public static function build(): BuildMacroResult {
+		debug('Start to build Body class.');
+
+		final localClass = Context.getLocalClass();
+		if (localClass == null) {
+			warn('Tried to build something that is not a class.');
+			debug('Go to next...');
+			return null;
+		}
+
+		final localClassName = localClass.toString();
+		final metadataArray = localClass.get().meta.extract(":partials");
+		final metadataExists = metadataArray.length > 0;
+
+		final result: BuildMacroResult = if (metadataExists) {
+			debug('Found metadata.');
+			processAllMetadata(localClassName, metadataArray);
+		} else null;
+
+		debug('End building.');
+		return result;
+	}
+
 	static function findTypeStrict(typeName: String): Null<haxe.macro.Type> {
 		try {
 			return Context.getType(typeName);
@@ -88,7 +102,7 @@ class BodyMacro {
 		return Success;
 	}
 
-	static function processAsHost(
+	static function processAllMetadata(
 		localClassName: String,
 		metadataArray: Array<MetadataEntry>
 	): BuildMacroResult {
@@ -129,28 +143,14 @@ class BodyMacro {
 
 		return localFields;
 	}
+}
 
-	macro public static function build(): BuildMacroResult {
-		debug('Start to build Body class.');
-
-		final localClass = Context.getLocalClass();
-		if (localClass == null) {
-			warn('Tried to build something that is not a class.');
-			debug('Go to next...');
-			return null;
-		}
-
-		final localClassName = localClass.toString();
-		final metadataArray = localClass.get().meta.extract(":partials");
-		final metadataExists = metadataArray.length > 0;
-
-		final result: BuildMacroResult = if (metadataExists) {
-			debug('Found metadata.');
-			processAsHost(localClassName, metadataArray);
-		} else null;
-
-		debug('End building.');
-		return result;
-	}
+private enum MetadataParameterProcessResult {
+	InvalidType;
+	NotFound;
+	NotClass;
+	Failure;
+	NoFields;
+	Success;
 }
 #end
