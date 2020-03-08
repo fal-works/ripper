@@ -34,7 +34,7 @@ class Macro {
 
 	static function log(content: Dynamic) {
 		final buffer = new StringBuffer();
-		buffer.addPrefixFilePosition(logPrefix);
+		buffer.addPrefixFilePath(logPrefix);
 		buffer.add(logSeparator);
 		buffer.add(Context.getLocalClass());
 		buffer.add(logSeparator);
