@@ -1,6 +1,6 @@
 package my_pack;
 
-@:partials(ActorPart, ActorPart.ActorSubPart)
+@:ripper.spirits(ActorPart, ActorPart.ActorSubPart)
 class Actor implements ripper.Body {
 	public function new() {}
 }

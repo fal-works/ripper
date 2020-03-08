@@ -18,10 +18,10 @@ class BodyMacro {
 		}
 
 		final localClassName = localClass.toString();
-		final metadataArray = localClass.get().meta.extract(":partials");
+		final metadataArray = localClass.get().meta.extract(":ripper.spirits");
 
 		if (metadataArray.length == 0) {
-			warn('Marked as Body, but missing metadata for specifying Spirit classes.');
+			warn('Marked as Body but missing @:ripper.spirits metadata for specifying classes from which to copy fields.');
 			return null;
 		}
 
