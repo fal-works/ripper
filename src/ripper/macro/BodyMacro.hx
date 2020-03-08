@@ -21,7 +21,7 @@ class BodyMacro {
 		final metadataArray = localClass.get().meta.extract(":partials");
 
 		if (metadataArray.length == 0) {
-			warn('Marked as Body, but missing metadata for specifying Soul classes.');
+			warn('Marked as Body, but missing metadata for specifying Spirit classes.');
 			return null;
 		}
 
@@ -90,7 +90,7 @@ class BodyMacro {
 		#end
 
 		debug('Resolved "${className}" as a class. Start to copy fields...');
-		final fields = SoulMacro.fieldsMap.get(fullTypeName);
+		final fields = SpiritMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
 		if (fields == null) return Failure;
