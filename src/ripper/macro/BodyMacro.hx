@@ -1,12 +1,12 @@
 package ripper.macro;
 
 #if macro
-import haxe.macro.ExprTools;
-#if !ripper_validation_disable
-import ripper.common.ExprExtension.validateDomainName;
-#end
-
 using sneaker.format.StringExtension;
+
+import haxe.macro.ExprTools;
+	#if !ripper_validation_disable
+	import ripper.common.ExprExtension.validateDomainName;
+	#end
 
 class BodyMacro {
 	/**
