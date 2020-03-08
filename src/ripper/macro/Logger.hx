@@ -33,7 +33,7 @@ class Logger {
 	}
 
 	public static inline function debug(content: Dynamic) {
-		#if (!ripper_log_disable && ripper_log_verbose)
+		#if (!ripper_log_disable && ripper_log_debug)
 		printLogText(debugPrefix, content);
 		#end
 	}
