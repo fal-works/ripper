@@ -5,8 +5,16 @@ import haxe.ds.StringMap;
 import haxe.macro.Compiler;
 
 class SpiritMacro {
+	/**
+		Mapping from `Spirit` classes to arrays of fields.
+		Used as a buffer for storing fields that will be copied to `Body` classes.
+	**/
 	@:persistent public static final fieldsMap = new StringMap<Array<Field>>();
 
+	/**
+		A build macro that is run for each `Spirit` classes.
+		Registers fields to `fieldsMap` and also excludes the type itself from compilation.
+	**/
 	macro public static function register(): BuildMacroResult {
 		debug('Start registration of Spirit fields.');
 

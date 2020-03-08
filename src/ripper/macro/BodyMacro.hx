@@ -7,6 +7,10 @@ import ripper.common.ExprExtension.validateDomainName;
 using sneaker.format.StringExtension;
 
 class BodyMacro {
+	/**
+		A build macro that is run for each `Body` classes.
+		Copies fields from `Spirit` classes that are specified by the `@:spirits` metadata.
+	**/
 	macro public static function build(): BuildMacroResult {
 		debug('Start to build Body class.');
 
@@ -34,6 +38,10 @@ class BodyMacro {
 		return result;
 	}
 
+	/**
+		Find type from `typeName`.
+		@return `null` if not found.
+	**/
 	static function findTypeStrict(typeName: String): Null<haxe.macro.Type> {
 		try {
 			return Context.getType(typeName);
@@ -42,6 +50,12 @@ class BodyMacro {
 		}
 	}
 
+	/**
+		Find type from `typeName`.
+		Also tries to find the type assuming that `typeName` is a relative path from the current package
+		(only the types that are in the current package or any of its sub-packages can be found).
+		@return `null` if not found.
+	**/
 	static function findType(typeName: String): Null<haxe.macro.Type> {
 		final type = findTypeStrict(typeName);
 		if (type != null) return type;
@@ -55,6 +69,10 @@ class BodyMacro {
 		}
 	}
 
+	/**
+		Extract the class instance from `type`.
+		This process is necessary for invoking the build macro of `type` if not yet called.
+	**/
 	static function resolveClass(type: haxe.macro.Type, typeName: String): Null<String> {
 		try {
 			final classType = TypeTools.getClass(type);
@@ -64,6 +82,10 @@ class BodyMacro {
 		}
 	}
 
+	/**
+		Parse a metadata parameter as a class name,
+		and adds the fields of that class to `localFields`.
+	**/
 	static function processMetadataParameter(
 		parameter: Expr,
 		parameterString: String,
@@ -106,6 +128,9 @@ class BodyMacro {
 		return Success;
 	}
 
+	/**
+		Process the given metadata array and calls `processMetadataParameter()` for each parameter.
+	**/
 	static function processAllMetadata(
 		localClassName: String,
 		metadataArray: Array<MetadataEntry>
@@ -149,6 +174,9 @@ class BodyMacro {
 	}
 }
 
+/**
+	Kind of result that `BodyMacro.processMetadataParameter()` returns.
+**/
 private enum MetadataParameterProcessResult {
 	InvalidType;
 	NotFound;

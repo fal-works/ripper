@@ -7,13 +7,38 @@ import sneaker.log.MacroLogger;
 
 using sneaker.log.MacroLogger;
 
+/**
+	Logging functions used in macro context of `ripper`.
+**/
 class Logger {
+	#if !ripper_log_disable
 	static final debugPrefix = "[DEBUG]";
 	static final infoPrefix = "[INFO]";
 	static final warnPrefix = "[WARN]";
 
 	static final logSeparator = " | ";
+	#end
 
+	public static inline function warn(content: Dynamic) {
+		#if !ripper_log_disable
+		printLogText(warnPrefix, content);
+		#end
+		MacroLogger.warn(content);
+	}
+
+	public static inline function info(content: Dynamic) {
+		#if !ripper_log_disable
+		printLogText(infoPrefix, content);
+		#end
+	}
+
+	public static inline function debug(content: Dynamic) {
+		#if (!ripper_log_disable && ripper_log_verbose)
+		printLogText(debugPrefix, content);
+		#end
+	}
+
+	#if !ripper_log_disable
 	static function printLogText(prefix: String, content: Dynamic) {
 		final buffer = new StringBuffer();
 
@@ -25,24 +50,6 @@ class Logger {
 
 		Printer.println(buffer.toString());
 	}
-
-	public static inline function debug(content: Dynamic) {
-		#if (!ripper_log_disable && ripper_log_verbose)
-		printLogText(debugPrefix, content);
-		#end
-	}
-
-	public static inline function info(content: Dynamic) {
-		#if !ripper_log_disable
-		printLogText(infoPrefix, content);
-		#end
-	}
-
-	public static inline function warn(content: Dynamic) {
-		#if !ripper_log_disable
-		printLogText(warnPrefix, content);
-		#end
-		MacroLogger.warn(content);
-	}
+	#end
 }
 #end
