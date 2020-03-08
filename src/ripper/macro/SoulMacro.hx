@@ -8,23 +8,11 @@ import haxe.macro.Expr;
 import haxe.macro.TypeTools;
 import sneaker.print.Printer.println;
 import sneaker.string_buffer.StringBuffer;
+import ripper.macro.Logger.*;
 
 using sneaker.log.MacroLogger;
 
 class SoulMacro {
-	static final logPrefix = "[RIPPER]";
-	static final logSeparator = " | ";
-
-	static function log(content: Dynamic) {
-		final buffer = new StringBuffer();
-		buffer.addPrefixFilePath(logPrefix);
-		buffer.add(logSeparator);
-		buffer.add(Context.getLocalClass());
-		buffer.add(logSeparator);
-		buffer.add(content);
-		println(buffer.toString());
-	}
-
 	public static final fieldsMap = new StringMap<Array<Field>>();
 
 	macro public static function register(): BuildMacroResult {

@@ -11,6 +11,7 @@ import sneaker.log.MacroLogger;
 import sneaker.string_buffer.StringBuffer;
 import sneaker.print.Printer.println;
 import haxe.macro.TypeTools;
+import ripper.macro.Logger.*;
 
 using ripper.common.ExprExtension;
 using sneaker.log.MacroLogger;
@@ -27,19 +28,6 @@ enum MetadataParameterProcessResult {
 }
 
 class Macro {
-	static final logPrefix = "[RIPPER]";
-	static final logSeparator = " | ";
-
-	static function log(content: Dynamic) {
-		final buffer = new StringBuffer();
-		buffer.addPrefixFilePath(logPrefix);
-		buffer.add(logSeparator);
-		buffer.add(Context.getLocalClass());
-		buffer.add(logSeparator);
-		buffer.add(content);
-		println(buffer.toString());
-	}
-
 	static function findTypeStrict(typeName: String): Null<haxe.macro.Type> {
 		try {
 			return Context.getType(typeName);
