@@ -8,4 +8,4 @@
 -main Main
 # -D ripper_validation_disable
 # -D ripper_log_disable
--D ripper_log_verbose
+-D ripper_log_debug
