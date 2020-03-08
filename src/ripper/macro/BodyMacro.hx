@@ -56,7 +56,7 @@ class BodyMacro {
 		if (validated == null) return InvalidType;
 		#end
 
-		log('Searching for type "${parameterString}" ...');
+		debug('Searching for type "${parameterString}" ...');
 
 		final type = findType(parameterString);
 		#if !ripper_validation_disable
@@ -64,14 +64,14 @@ class BodyMacro {
 		#end
 
 		final fullTypeName = TypeTools.toString(type);
-		log('Found type "${fullTypeName}". Resolving as a class...');
+		debug('Found type "${fullTypeName}". Resolving as a class...');
 		final className = resolveClass(type, fullTypeName);
 
 		#if !ripper_validation_disable
 		if (className == null) return NotClass;
 		#end
 
-		log('Resolved "${className}" as a class. Start to copy fields...');
+		debug('Resolved "${className}" as a class. Start to copy fields...');
 		final fields = SoulMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
@@ -82,7 +82,7 @@ class BodyMacro {
 		for (field in fields) {
 			field.pos = Context.currentPos();
 			localFields.push(field);
-			log('Copied field "${field.name}".');
+			debug('Copied field "${field.name}".');
 		}
 
 		return Success;
@@ -94,12 +94,13 @@ class BodyMacro {
 		for (metadata in metadataArray) {
 			final metadataParameters = metadata.params;
 			if (metadataParameters == null) {
-				log("Found metadata without arguments. Go to next...");
+				warn("Found metadata without arguments.");
+				debug('Go to next...');
 				continue;
 			}
 			for (parameter in metadataParameters) {
 				final typeName = ExprTools.toString(parameter);
-				log('Start to process metadata parameter "${typeName}"...');
+				debug('Start to process metadata parameter "${typeName}"...');
 				final result = processMetadataParameter(
 					parameter,
 					typeName,
@@ -108,17 +109,17 @@ class BodyMacro {
 
 				switch result {
 					case InvalidType:
-						log('"${typeName}" is an invalid type name.');
+						warn('"${typeName}" is an invalid type name.');
 					case NotFound:
-						log('Type "${typeName}" not found.');
+						warn('Type "${typeName}" not found.');
 					case NotClass:
-						log('"${typeName}" is not a class.');
+						warn('"${typeName}" is not a class.');
 					case Failure:
-						log('Failed to get fields data of ${typeName} for unknown reason.');
+						warn('Failed to get fields data of "${typeName}" for unknown reason.');
 					case NoFields:
-						log('No fields in ${typeName}.');
+						warn('No fields in "${typeName}".');
 					case Success:
-						log('Copied fields from ${typeName}.');
+						info('Copied fields from "${typeName}".');
 				}
 			}
 		}
@@ -127,11 +128,12 @@ class BodyMacro {
 	}
 
 	macro public static function build(): BuildMacroResult {
-		log("Start to build Body class.");
+		debug('Start to build Body class.');
 
 		final localClass = Context.getLocalClass();
 		if (localClass == null) {
-			log("Tried to build something that is not a class. Go to next...");
+			warn('Tried to build something that is not a class.');
+			debug('Go to next...');
 			return null;
 		}
 
@@ -139,11 +141,11 @@ class BodyMacro {
 		final metadataExists = metadataArray.length > 0;
 
 		final result: BuildMacroResult = if (metadataExists) {
-			log("Found metadata.");
+			debug('Found metadata.');
 			processAsHost(metadataArray);
 		} else null;
 
-		log("End building.");
+		debug('End building.');
 		return result;
 	}
 }

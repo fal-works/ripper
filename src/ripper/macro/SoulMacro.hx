@@ -8,11 +8,12 @@ class SoulMacro {
 	@:persistent public static final fieldsMap = new StringMap<Array<Field>>();
 
 	macro public static function register(): BuildMacroResult {
-		log('Start registering Soul fields.');
+		debug('Start registering Soul fields.');
 
 		final localType = Context.getLocalType();
 		if (localType == null) {
-			log('Tried to process something that is not a type. Break registration.');
+			warn('Tried to process something that is not a type.');
+			debug('Break registration.');
 			return null;
 		}
 
@@ -20,10 +21,10 @@ class SoulMacro {
 
 		final localFields = Context.getBuildFields();
 		fieldsMap.set(localTypePath, localFields);
-		log('Registered fields.');
+		info('Registered Soul fields for copying to Body.');
 
 		Compiler.exclude(localTypePath, false);
-		log('Excluded this type from compilation.');
+		debug('Excluded this type from compilation.');
 
 		return null;
 	}
