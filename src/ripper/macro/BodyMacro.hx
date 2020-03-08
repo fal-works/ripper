@@ -26,7 +26,7 @@ enum MetadataParameterProcessResult {
 	Success;
 }
 
-class Macro {
+class BodyMacro {
 	static function findTypeStrict(typeName: String): Null<haxe.macro.Type> {
 		try {
 			return Context.getType(typeName);
@@ -137,12 +137,12 @@ class Macro {
 		return localFields;
 	}
 
-	macro public static function process(): BuildMacroResult {
-		log("Start processing.");
+	macro public static function build(): BuildMacroResult {
+		log("Start building Body class.");
 
 		final localClass = Context.getLocalClass();
 		if (localClass == null) {
-			log("Tried to process something that is not a class. Go to next...");
+			log("Tried to build something that is not a class. Go to next...");
 			return null;
 		}
 
@@ -154,7 +154,7 @@ class Macro {
 			processAsHost(metadataArray);
 		} else null;
 
-		log("end processing");
+		log("End building.");
 		return result;
 	}
 }

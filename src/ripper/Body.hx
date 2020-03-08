@@ -1,4 +1,4 @@
 package ripper;
 
-@:autoBuild(ripper.macro.Macro.process())
+@:autoBuild(ripper.macro.BodyMacro.build())
 interface Body {}
