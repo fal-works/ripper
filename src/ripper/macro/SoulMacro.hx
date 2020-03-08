@@ -13,7 +13,7 @@ import ripper.macro.Logger.*;
 using sneaker.log.MacroLogger;
 
 class SoulMacro {
-	public static final fieldsMap = new StringMap<Array<Field>>();
+	@:persistent public static final fieldsMap = new StringMap<Array<Field>>();
 
 	macro public static function register(): BuildMacroResult {
 		log('Start registering Soul fields.');
