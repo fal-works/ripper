@@ -19,12 +19,16 @@ class BodyMacro {
 
 		final localClassName = localClass.toString();
 		final metadataArray = localClass.get().meta.extract(":partials");
-		final metadataExists = metadataArray.length > 0;
 
-		final result: BuildMacroResult = if (metadataExists) {
-			debug('Found metadata.');
-			processAllMetadata(localClassName, metadataArray);
-		} else null;
+		if (metadataArray.length == 0) {
+			warn('Marked as Body, but missing metadata for specifying Soul classes.');
+			return null;
+		}
+
+		final result: BuildMacroResult = processAllMetadata(
+			localClassName,
+			metadataArray
+		);
 
 		debug('End building.');
 		return result;

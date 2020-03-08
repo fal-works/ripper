@@ -8,7 +8,7 @@ class SoulMacro {
 	@:persistent public static final fieldsMap = new StringMap<Array<Field>>();
 
 	macro public static function register(): BuildMacroResult {
-		debug('Start registering Soul fields.');
+		debug('Start registration of Soul fields.');
 
 		final localType = Context.getLocalType();
 		if (localType == null) {
@@ -27,7 +27,7 @@ class SoulMacro {
 			warn('Marked as Soul but no fields for copying to Body.');
 
 		Compiler.exclude(localTypePath, false);
-		debug('Excluded this type from compilation.');
+		debug('Exclude this type from compilation. End registration.');
 
 		return null;
 	}
