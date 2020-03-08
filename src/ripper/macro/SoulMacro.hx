@@ -21,7 +21,10 @@ class SoulMacro {
 
 		final localFields = Context.getBuildFields();
 		fieldsMap.set(localTypePath, localFields);
-		info('Registered Soul fields for copying to Body.');
+		if (localFields.length > 0)
+			debug('Registered Soul fields for copying to Body.');
+		else
+			warn('Marked as Soul but no fields for copying to Body.');
 
 		Compiler.exclude(localTypePath, false);
 		debug('Excluded this type from compilation.');

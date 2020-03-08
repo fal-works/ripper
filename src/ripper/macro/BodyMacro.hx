@@ -88,7 +88,10 @@ class BodyMacro {
 		return Success;
 	}
 
-	static function processAsHost(metadataArray: Array<MetadataEntry>): BuildMacroResult {
+	static function processAsHost(
+		localClassName: String,
+		metadataArray: Array<MetadataEntry>
+	): BuildMacroResult {
 		final localFields = Context.getBuildFields();
 
 		for (metadata in metadataArray) {
@@ -117,9 +120,9 @@ class BodyMacro {
 					case Failure:
 						warn('Failed to get fields data of "${typeName}" for unknown reason.');
 					case NoFields:
-						warn('No fields in "${typeName}".');
+						debug('No fields in "${typeName}".');
 					case Success:
-						info('Copied fields from "${typeName}".');
+						info('Copied fields: ${localClassName.sliceAfterLastDot()} <= ${typeName.sliceAfterLastDot()}');
 				}
 			}
 		}
@@ -137,12 +140,13 @@ class BodyMacro {
 			return null;
 		}
 
+		final localClassName = localClass.toString();
 		final metadataArray = localClass.get().meta.extract(":partials");
 		final metadataExists = metadataArray.length > 0;
 
 		final result: BuildMacroResult = if (metadataExists) {
 			debug('Found metadata.');
-			processAsHost(metadataArray);
+			processAsHost(localClassName, metadataArray);
 		} else null;
 
 		debug('End building.');
