@@ -123,8 +123,8 @@ class BodyMacro {
 
 		for (field in fields) {
 			field.pos = Context.currentPos();
+			debug('Copying field: ${field.name}');
 			localFields.push(field);
-			debug('Copied field: ${field.name}');
 			// TODO: duplicate check
 		}
 
