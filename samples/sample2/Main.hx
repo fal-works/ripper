@@ -2,9 +2,9 @@ package sample2;
 
 class Main {
 	public static function main() {
-		// final player = new Player();
-		// player.attack();
-		// player.magic();
-		// player.attackHard();
+		final player = new Player("Noname", 20);
+		player.attack();
+		player.magic();
+		player.attackHard();
 	}
 }
