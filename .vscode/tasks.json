@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build and Test",
+      "label": "Build and Test (HL/JIT)",
       "type": "hxml",
       "file": "hl-jit-test.hxml",
       "problemMatcher": [
@@ -19,7 +19,7 @@
       }
     },
     {
-      "label": "Build",
+      "label": "Build (HL/JIT)",
       "type": "hxml",
       "file": "hl-jit.hxml",
       "problemMatcher": [
@@ -31,7 +31,7 @@
       "group": "build"
     },
     {
-      "label": "Eval",
+      "label": "Build and Test (Eval)",
       "type": "hxml",
       "file": "eval-test.hxml",
       "problemMatcher": [

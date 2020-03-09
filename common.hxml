@@ -1,15 +1,12 @@
 # Common Build arguments
 
 -cp src
-
-# Enable one of the samples below:
--cp samples/sample1
-# -cp samples/sample2
+-cp test
 
 -dce full
 --macro nullSafety("ripper", Strict)
 -lib sneaker
--main Main
+-main Test
 
 # -D ripper_validation_disable
 # -D ripper_log_disable

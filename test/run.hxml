@@ -1,0 +1,9 @@
+-lib ripper
+
+# -D ripper_validation_disable
+# -D ripper_log_disable
+-D ripper_log_debug
+
+-dce full
+-main Main
+--interp
