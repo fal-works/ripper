@@ -1,7 +1,7 @@
 # Common Build arguments
 
 -cp src
--cp test
+-cp sample
 -dce full
 --macro nullSafety("ripper", Strict)
 -lib sneaker
