@@ -1,7 +1,7 @@
 # ripper
 
-A micro-library for building up classes from reusable components  
-(which is also called "Mixin" or "partial implementation").
+A small library for building up classes from reusable components  
+(which is also called Mixin or Partial Implementation).
 
 Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
 
@@ -46,7 +46,8 @@ class Main {
 ```
 
 Finally the output below  
-(at default this library prints some [INFO] logs during the compilation).
+(at default this library prints some [INFO] logs during the compilation.  
+ See "Compiler flags" below for details).
 
 ```
 [INFO]   Player.hx | Player | Copied fields: Player <= Attacker
@@ -96,9 +97,19 @@ In that case you may have to reboot it manually (if VSCode, `>Haxe: Restart Lang
 |ripper_log_disable|Disables printing logs (excluding the warning compilation message).|
 |ripper_log_debug|Enables printing logs of Debug level.|
 
+### Disable validation/log
+
+If you are sure that your code works fine,  
+you may want to disable the debugging features with the following flags:
+
+`-D ripper_validation_disable`
+`-D ripper_log_disable`
+
 ### Debug log
 
-With the flag `ripper_log_debug` set, you can see more detailed log messages when compiling.
+With the flag `-D ripper_log_debug` set, you can see more detailed log messages when compiling.
+
+Such as:
 
 ```
 [DEBUG]  Initialize Spirit fields map. (ripper.macro.SpiritMacro::fieldsMap)
