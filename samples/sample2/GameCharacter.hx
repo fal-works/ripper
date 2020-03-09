@@ -1,5 +1,3 @@
-package sample2;
-
 class GameCharacter {
 	final name: String;
 	final offence: Int;

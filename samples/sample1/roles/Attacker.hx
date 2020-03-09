@@ -1,4 +1,4 @@
-package sample1.roles;
+package roles;
 
 class Attacker implements ripper.Spirit {
 	public function attack() {

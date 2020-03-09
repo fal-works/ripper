@@ -1,6 +1,6 @@
-package sample2.roles;
+package roles;
 
-class Magician extends sample2.GameCharacter implements ripper.Spirit {
+class Magician extends GameCharacter implements ripper.Spirit {
 	public function magic() {
 		trace('${this.name} chanted magic!');
 	}

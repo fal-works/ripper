@@ -1,13 +1,13 @@
-package sample2.roles;
+package roles;
 
-class Attacker extends sample2.GameCharacter implements ripper.Spirit {
+class Attacker extends GameCharacter implements ripper.Spirit {
 	public function attack() {
 		trace('${this.name} attacked!');
 		trace('${this.offence} damage on the opponent!');
 	}
 }
 
-class HardAttacker extends sample2.GameCharacter implements ripper.Spirit {
+class HardAttacker extends GameCharacter implements ripper.Spirit {
 	public function attackHard() {
 		trace('${this.name} attacked hard!!');
 		trace('${2 * this.offence} damage on the opponent!');
