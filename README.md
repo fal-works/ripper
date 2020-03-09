@@ -60,11 +60,11 @@ Attacker.hx:3: Player attacked!
 
 - It can also have multiple parameters.
 - You can write multiple `@:ripper.spirits()` lines as well.
-- A module subtype can also be specified.
+- A module subclass can also be specified.
 
 ```haxe
-@:ripper.spirits(roles.Attacker, roles.Magician)
-@:ripper.spirits(roles.Attacker.HardAttacker)
+@:ripper.spirits(my_pkg.Attacker, my_pkg.Magician)
+@:ripper.spirits(my_pkg.Attacker.HardAttacker)
 ```
 
 The classes can be specified with:
