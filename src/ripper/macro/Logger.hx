@@ -59,9 +59,11 @@ class Logger {
 		#if (!ripper_log_disable && ripper_log_debug)
 		final buffer = new StringBuffer();
 		buffer.add('${debugPrefix.rpad(" ", alignmentPosition)}');
-		buffer.add(pos.formatFile());
-		buffer.add(logSeparator);
 		buffer.add(content);
+		buffer.addChar(" ".code);
+		buffer.addChar("(".code);
+		buffer.add(pos.formatClassMethod());
+		buffer.addChar(")".code);
 
 		Printer.println(buffer.toString());
 		#end
