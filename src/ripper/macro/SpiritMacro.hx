@@ -9,7 +9,10 @@ class SpiritMacro {
 		Mapping from `Spirit` classes to arrays of fields.
 		Used as a buffer for storing fields that will be copied to `Body` classes.
 	**/
-	@:persistent public static final fieldsMap = new StringMap<Array<Field>>();
+	@:persistent public static final fieldsMap = {
+		debugWithoutContext('Initialize Spirit fields map.');
+		new StringMap<Array<Field>>();
+	}
 
 	/**
 		A build macro that is run for each `Spirit` classes.
