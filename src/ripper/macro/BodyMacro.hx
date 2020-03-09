@@ -1,6 +1,7 @@
 package ripper.macro;
 
 #if macro
+using Lambda;
 using sneaker.format.StringExtension;
 
 import haxe.macro.ExprTools;
@@ -85,6 +86,20 @@ class BodyMacro {
 	}
 
 	/**
+		@return `Field` object that has the same name as `name`. `null` if not found.
+	**/
+	static function findFieldIn(fields: Array<Field>, name: String): Null<Field> {
+		var found: Null<Field> = null;
+		for (i in 0...fields.length) {
+			final field = fields[i];
+			if (field.name != name) continue;
+			found = field;
+			break;
+		}
+		return found;
+	}
+
+	/**
 		Parse a metadata parameter as a class name,
 		and adds the fields of that class to `localFields`.
 	**/
@@ -122,10 +137,17 @@ class BodyMacro {
 		#end
 
 		for (field in fields) {
-			field.pos = Context.currentPos();
 			debug('Copying field: ${field.name}');
-			localFields.push(field);
-			// TODO: duplicate check
+
+			final sameNameField = findFieldIn(localFields, field.name);
+			if (sameNameField != null) {
+				warn('  A field with the same name already exists.');
+				continue;
+			}
+
+			final copyingField = Reflect.copy(field);
+			copyingField.pos = Context.currentPos();
+			localFields.push(copyingField);
 		}
 
 		return Success;
