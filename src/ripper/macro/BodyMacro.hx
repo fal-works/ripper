@@ -139,11 +139,13 @@ class BodyMacro {
 		for (field in fields) {
 			debug('Copying field: ${field.name}');
 
+			#if !ripper_validation_disable
 			final sameNameField = findFieldIn(localFields, field.name);
 			if (sameNameField != null) {
-				warn('  A field with the same name already exists.');
+				warn('  Duplicate field name: ${field.name}');
 				continue;
 			}
+			#end
 
 			final copyingField = Reflect.copy(field);
 			copyingField.pos = Context.currentPos();
