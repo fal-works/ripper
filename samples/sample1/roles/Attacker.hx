@@ -1,13 +1,13 @@
-package roles;
+package sample1.roles;
 
 class Attacker implements ripper.Spirit {
 	public function attack() {
-		trace('${this} attacked!');
+		trace('Player attacked!');
 	}
 }
 
 class HardAttacker implements ripper.Spirit {
 	public function attackHard() {
-		trace('${this} attacked hard!!');
+		trace('Player attacked hard!!');
 	}
 }
