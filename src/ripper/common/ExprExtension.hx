@@ -4,6 +4,11 @@ package ripper.common;
 import haxe.macro.Expr;
 
 class ExprExtension {
+	/**
+		Validates that `expression` is a valid domain name representation
+		(which is dot-separated, e.g. `pack.subpack.MyModule.MyClass`)
+		@return A `String` representation of `expression`, or `null` if invalid.
+	**/
 	public static function validateDomainName(expression: Expr): Null<String> {
 		return switch expression.expr {
 			case EConst(constant):
