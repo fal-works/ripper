@@ -76,10 +76,13 @@ class BodyMacro {
 		Extract the class instance from `type`.
 		This process is necessary for invoking the build macro of `type` if not yet called.
 	**/
-	static function resolveClass(type: haxe.macro.Type, typeName: String): Null<String> {
+	static function resolveClass(
+		type: haxe.macro.Type,
+		typeName: String
+	): Null<haxe.macro.Type.ClassType> {
 		try {
 			final classType = TypeTools.getClass(type);
-			return classType.name;
+			return classType;
 		} catch (e:Dynamic) {
 			return null;
 		}
@@ -122,13 +125,13 @@ class BodyMacro {
 
 		final fullTypeName = TypeTools.toString(type);
 		debug('Found type "${fullTypeName}". Resolving as a class.');
-		final className = resolveClass(type, fullTypeName);
+		final classType = resolveClass(type, fullTypeName);
 
 		#if !ripper_validation_disable
-		if (className == null) return NotClass;
+		if (classType == null) return NotClass;
 		#end
 
-		debug('Resolved "${className}" as a class. Start to copy fields.');
+		debug('Resolved "${classType.name}" as a class. Start to copy fields.');
 		final fields = SpiritMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
