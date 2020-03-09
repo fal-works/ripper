@@ -8,6 +8,17 @@ Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
 **Requires Haxe 4** (tested with v4.0.5).
 
 
+## Features
+
+What it does is just copying fields from a class to another, using the `@:autoBuild` macro.
+
+Remarks:
+
+- Source code with each function commented
+- Friendly debug log mode (see "Compiler flags" below)
+- Developed within a few days and haven't considered many usecases yet
+
+
 ## Usage
 
 Prepare a class that you want to use as a component of another class.
