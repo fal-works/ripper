@@ -1,4 +1,4 @@
-package ripper.macro;
+package ripper.macro.utility;
 
 #if macro
 import haxe.PosInfos;

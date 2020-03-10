@@ -1,4 +1,4 @@
-package ripper.common;
+package ripper.macro.utility;
 
 #if macro
 import haxe.macro.Expr;

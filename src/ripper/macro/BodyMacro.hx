@@ -6,8 +6,9 @@ using sneaker.format.StringExtension;
 
 import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;
+import ripper.macro.utility.ContextTools;
 	#if !ripper_validation_disable
-	import ripper.common.ExprExtension.validateDomainName;
+	import ripper.macro.utility.ExprExtension.validateDomainName;
 	#end
 
 class BodyMacro {
