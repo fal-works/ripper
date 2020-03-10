@@ -3,6 +3,7 @@ package ripper.macro;
 #if macro
 using Lambda;
 using sneaker.format.StringExtension;
+using ripper.macro.utility.FieldExtension;
 
 import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;
@@ -115,8 +116,13 @@ class BodyMacro {
 			#if !ripper_validation_disable
 			final sameNameField = findFieldIn(localFields, field.name);
 			if (sameNameField != null) {
-				warn('    Duplicate field name: ${field.name}');
-				continue;
+				if (field.hasMetadata(":ripper.override")) {
+					debug('    Override field.');
+					localFields.remove(sameNameField);
+				} else {
+					warn('    Duplicate field name: ${field.name}');
+					continue;
+				}
 			}
 			#end
 
