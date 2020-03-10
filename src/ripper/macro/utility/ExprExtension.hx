@@ -23,5 +23,25 @@ class ExprExtension {
 				null;
 		};
 	}
+
+	/**
+		@return `true` if `a` and `b` are deeply equal.
+	**/
+	public static function equalImport(a: ImportExpr, b: ImportExpr): Bool {
+		if (!Type.enumEq(a.mode, b.mode)) return false;
+
+		final pathA = a.path;
+		final pathB = b.path;
+		final len = pathA.length;
+		if (len != pathB.length) return false;
+
+		for (i in 0...len) {
+			final nodeA = pathA[i];
+			final nodeB = pathB[i];
+			if (nodeA.name != nodeB.name) return false;
+		}
+
+		return true;
+	}
 }
 #end
