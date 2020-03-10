@@ -7,8 +7,9 @@ import sneaker.print.Printer;
 import sneaker.macro.CompilerMessage;
 import sneaker.log.LogFormats.alignmentPosition;
 
-using sneaker.macro.StringBufferLogExtension;
+using sneaker.format.StringExtension;
 using sneaker.format.PosInfosExtension;
+using sneaker.macro.StringBufferLogExtension;
 
 /**
 	Logging functions used in macro context of `ripper`.
@@ -77,7 +78,7 @@ class Logger {
 
 		buffer.addPrefixFilePath(prefix);
 		buffer.add(logSeparator);
-		buffer.add(Context.getLocalClass());
+		buffer.add(Context.getLocalClass().toString().sliceAfterLastDot());
 		buffer.add(logSeparator);
 		buffer.add(content);
 
