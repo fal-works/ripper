@@ -23,7 +23,7 @@ class ContextTools {
 	}
 
 	/**
-		Find class from `classPath`.
+		Tries to resolve the module, then finds class in that module.
 		@return Class instance as `haxe.macro.Type`. `null` if not found.
 	**/
 	public static function findClassyTypeOrSubType(classPath: String): Null<MacroType> {
@@ -32,26 +32,34 @@ class ContextTools {
 		debug("Resolving module...");
 		var module: Null<MacroModule> = null;
 		module = tryGetModule(classPath);
-		if (module == null) {
-			debug('  ${classPath} => Not found.');
-			final lastDotIndex = classPath.lastIndexOfDot();
-			final beforeLastDot = classPath.substr(0, lastDotIndex);
-			module = tryGetModule(beforeLastDot);
-			if (module == null) {
-				debug('  ${beforeLastDot} => Not found.');
-				return null;
-			} else {
-				debug('  ${beforeLastDot} => Found.');
-				final secondLastDotIndex = beforeLastDot.lastIndexOfDot();
-				final beforeSecondDot = beforeLastDot.substr(0, secondLastDotIndex);
-				final subclassPath = beforeSecondDot + classPath.substr(lastDotIndex);
-				found = findClassyTypeIn(module, subclassPath);
-				if (found != null) return found;
-			}
-		} else {
+
+		if (module != null) {
+			// classPath == modulePath
 			debug('  ${classPath} => Found.');
 			found = findClassyTypeIn(module, classPath);
+
 			if (found != null) return found;
+			// TODO: some debug log here
+		} else {
+			debug('  ${classPath} => Not found.');
+		}
+
+		final lastDotIndex = classPath.lastIndexOfDot();
+		final beforeLastDot = classPath.substr(0, lastDotIndex);
+		module = tryGetModule(beforeLastDot);
+
+		if (module != null) {
+			// classPath = modulePath.subClassName
+			debug('  ${beforeLastDot} => Found.');
+			final secondLastDotIndex = beforeLastDot.lastIndexOfDot();
+			final beforeSecondDot = beforeLastDot.substr(0, secondLastDotIndex);
+			final subclassPath = beforeSecondDot + classPath.substr(lastDotIndex);
+			found = findClassyTypeIn(module, subclassPath);
+
+			if (found != null) return found;
+			// TODO: some debug log here
+		} else {
+			debug('  ${beforeLastDot} => Not found.');
 		}
 
 		return null;
