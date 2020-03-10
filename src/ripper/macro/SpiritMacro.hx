@@ -18,7 +18,7 @@ class SpiritMacro {
 		A build macro that is run for each `Spirit` classes.
 		Registers fields to `fieldsMap` and also excludes the type itself from compilation.
 	**/
-	macro public static function register(): BuildMacroResult {
+	macro public static function register(): Null<Fields> {
 		debug('Start registration of Spirit fields.');
 
 		final localType = Context.getLocalType();
