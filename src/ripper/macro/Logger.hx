@@ -4,11 +4,10 @@ package ripper.macro;
 import haxe.PosInfos;
 import sneaker.string_buffer.StringBuffer;
 import sneaker.print.Printer;
-import sneaker.log.MacroLogger;
+import sneaker.macro.CompilerMessage;
 import sneaker.log.LogFormats.alignmentPosition;
 
-using StringTools;
-using sneaker.log.MacroLogger;
+using sneaker.macro.StringBufferLogExtension;
 using sneaker.format.PosInfosExtension;
 
 /**
@@ -31,7 +30,7 @@ class Logger {
 		#if !ripper_log_disable
 		printLogText(warnPrefix, content);
 		#end
-		MacroLogger.warn(content);
+		CompilerMessage.warn(content);
 	}
 
 	/**
@@ -58,7 +57,7 @@ class Logger {
 	public static inline function debugWithoutContext(content: Dynamic, ?pos: PosInfos) {
 		#if (!ripper_log_disable && ripper_log_debug)
 		final buffer = new StringBuffer();
-		buffer.add('${debugPrefix.rpad(" ", alignmentPosition)}');
+		buffer.addRightPadded(debugPrefix, " ".code, alignmentPosition);
 		buffer.add(content);
 		buffer.addChar(" ".code);
 		buffer.addChar("(".code);
