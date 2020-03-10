@@ -14,8 +14,11 @@ What it does is just copying fields from a class to another, using the `@:autoBu
 
 Remarks:
 
-- Source code with each function commented
+- Source code with every function commented
 - Friendly debug log mode (see "Compiler flags" below)
+
+Downside:
+
 - Developed within a few days and haven't considered many usecases yet
 
 
@@ -138,3 +141,7 @@ Such as:
 [INFO]   Player.hx | Player | Copied fields: Player <= Attacker
 [DEBUG]  Player.hx | Player | End building.
 ```
+
+## Dependencies
+
+- [sneaker](https://github.com/fal-works/sneaker)
