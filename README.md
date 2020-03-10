@@ -126,7 +126,9 @@ Such as:
 [DEBUG]  Initialize Spirit fields map. (ripper.macro.SpiritMacro::fieldsMap)
 [DEBUG]  Player.hx | Player | Start to build Body class.
 [DEBUG]  Player.hx | Player | Start to process metadata parameter: Attacker
-[DEBUG]  Player.hx | Player | Searching type: Attacker
+[DEBUG]  Player.hx | Player | Start to search type: Attacker
+[DEBUG]  Player.hx | Player | Resolving module...
+[DEBUG]  Player.hx | Player |   Attacker => Found.
 [DEBUG]  Player.hx | Player | Found type "Attacker". Resolving as a class.
 [DEBUG]  Attacker.hx | Attacker | Start registration of Spirit fields.
 [DEBUG]  Attacker.hx | Attacker | Registered Spirit fields for copying to Body.

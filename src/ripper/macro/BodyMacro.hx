@@ -5,6 +5,7 @@ using Lambda;
 using sneaker.format.StringExtension;
 
 import haxe.macro.ExprTools;
+import haxe.macro.Type.ClassType;
 	#if !ripper_validation_disable
 	import ripper.common.ExprExtension.validateDomainName;
 	#end
@@ -14,7 +15,7 @@ class BodyMacro {
 		A build macro that is run for each `Body` classes.
 		Copies fields from `Spirit` classes that are specified by the `@:spirits` metadata.
 	**/
-	macro public static function build(): BuildMacroResult {
+	macro public static function build(): Null<Fields> {
 		debug('Start to build Body class.');
 
 		final localClass = Context.getLocalClass();
@@ -32,7 +33,7 @@ class BodyMacro {
 			return null;
 		}
 
-		final result: BuildMacroResult = processAllMetadata(
+		final result: Null<Fields> = processAllMetadata(
 			localClassName,
 			metadataArray
 		);
@@ -42,44 +43,10 @@ class BodyMacro {
 	}
 
 	/**
-		Find type from `typeName`.
-		@return `null` if not found.
-	**/
-	static function findTypeStrict(typeName: String): Null<haxe.macro.Type> {
-		try {
-			return Context.getType(typeName);
-		} catch (e:Dynamic) {
-			return null;
-		}
-	}
-
-	/**
-		Find type from `typeName`.
-		Also tries to find the type assuming that `typeName` is a relative path from the current package
-		(only the types that are in the current package or any of its sub-packages can be found).
-		@return `null` if not found.
-	**/
-	static function findType(typeName: String): Null<haxe.macro.Type> {
-		final type = findTypeStrict(typeName);
-		if (type != null) return type;
-
-		try {
-			final modulePath = Context.getLocalModule();
-			final packagePath = modulePath.sliceBeforeLastDot();
-			return findTypeStrict('${packagePath}.${typeName}');
-		} catch (e:Dynamic) {
-			return null;
-		}
-	}
-
-	/**
 		Extract the class instance from `type`.
 		This process is necessary for invoking the build macro of `type` if not yet called.
 	**/
-	static function resolveClass(
-		type: haxe.macro.Type,
-		typeName: String
-	): Null<haxe.macro.Type.ClassType> {
+	static function resolveClass(type: MacroType, typeName: String): Null<ClassType> {
 		try {
 			final classType = TypeTools.getClass(type);
 			return classType;
@@ -116,9 +83,9 @@ class BodyMacro {
 		if (validated == null) return InvalidType;
 		#end
 
-		debug('Searching type: ${parameterString}');
+		debug('Start to search type: ${parameterString}');
 
-		final type = findType(parameterString);
+		final type = ContextTools.findClassyType(parameterString);
 		#if !ripper_validation_disable
 		if (type == null) return NotFound;
 		#end
@@ -164,7 +131,7 @@ class BodyMacro {
 	static function processAllMetadata(
 		localClassName: String,
 		metadataArray: Array<MetadataEntry>
-	): BuildMacroResult {
+	): Null<Fields> {
 		final localFields = Context.getBuildFields();
 
 		for (metadata in metadataArray) {
