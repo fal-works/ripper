@@ -29,17 +29,17 @@ class ContextTools {
 	public static function findClassyTypeOrSubType(classPath: String): Null<MacroType> {
 		var found: Null<MacroType> = null;
 
-		debug("Resolving module...");
 		var module: Null<MacroModule> = null;
 		module = tryGetModule(classPath);
 
 		if (module != null) {
 			// classPath == modulePath
 			debug('  ${classPath} => Found.');
-			found = findClassyTypeIn(module, classPath);
 
+			found = findClassyTypeIn(module, classPath);
 			if (found != null) return found;
-			// TODO: some debug log here
+
+			debug('    Type not found in that module.');
 		} else {
 			debug('  ${classPath} => Not found.');
 		}
@@ -51,13 +51,14 @@ class ContextTools {
 		if (module != null) {
 			// classPath = modulePath.subClassName
 			debug('  ${beforeLastDot} => Found.');
+
 			final secondLastDotIndex = beforeLastDot.lastIndexOfDot();
 			final beforeSecondDot = beforeLastDot.substr(0, secondLastDotIndex);
 			final subclassPath = beforeSecondDot + classPath.substr(lastDotIndex);
 			found = findClassyTypeIn(module, subclassPath);
-
 			if (found != null) return found;
-			// TODO: some debug log here
+
+			debug('    Type not found in that module.');
 		} else {
 			debug('  ${beforeLastDot} => Not found.');
 		}
@@ -72,6 +73,8 @@ class ContextTools {
 		@return Class instance as `haxe.macro.Type`. `null` if not found.
 	**/
 	public static function findClassyType(classPath: String): Null<MacroType> {
+		debug("Resolving module...");
+
 		final type = findClassyTypeOrSubType(classPath);
 		if (type != null) return type;
 
