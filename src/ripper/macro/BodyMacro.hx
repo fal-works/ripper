@@ -92,14 +92,16 @@ class BodyMacro {
 		#end
 
 		final fullTypeName = TypeTools.toString(type);
-		debug('Found type "${fullTypeName}". Resolving as a class.');
+		debug('Found type: ${fullTypeName}');
+		debug('Resolving as a class.');
 		final classType = resolveClass(type, fullTypeName);
 
 		#if !ripper_validation_disable
 		if (classType == null) return NotClass;
 		#end
 
-		debug('Resolved "${classType.name}" as a class. Start to copy fields.');
+		debug('Resolved type as a class: ${classType.name}');
+		debug('Copying fields...');
 		final fields = SpiritMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
@@ -108,12 +110,12 @@ class BodyMacro {
 		#end
 
 		for (field in fields) {
-			debug('Copying field: ${field.name}');
+			debug('  - ${field.name}');
 
 			#if !ripper_validation_disable
 			final sameNameField = findFieldIn(localFields, field.name);
 			if (sameNameField != null) {
-				warn('  Duplicate field name: ${field.name}');
+				warn('    Duplicate field name: ${field.name}');
 				continue;
 			}
 			#end

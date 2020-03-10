@@ -132,12 +132,14 @@ Such as:
 [DEBUG]  Player.hx | Player | Start to search type: Attacker
 [DEBUG]  Player.hx | Player | Resolving module...
 [DEBUG]  Player.hx | Player |   Attacker => Found.
-[DEBUG]  Player.hx | Player | Found type "Attacker". Resolving as a class.
+[DEBUG]  Player.hx | Player | Found type: Attacker
+[DEBUG]  Player.hx | Player | Resolving as a class.
 [DEBUG]  Attacker.hx | Attacker | Start registration of Spirit fields.
-[DEBUG]  Attacker.hx | Attacker | Registered Spirit fields for copying to Body.
+[DEBUG]  Attacker.hx | Attacker | Registered Spirit fields for copying to Body.        
 [DEBUG]  Attacker.hx | Attacker | Exclude this type from compilation. End registration.
-[DEBUG]  Player.hx | Player | Resolved "Attacker" as a class. Start to copy fields.
-[DEBUG]  Player.hx | Player | Copying field: attack
+[DEBUG]  Player.hx | Player | Resolved type as a class: Attacker
+[DEBUG]  Player.hx | Player | Copying fields...
+[DEBUG]  Player.hx | Player |   - attack
 [INFO]   Player.hx | Player | Copied fields: Player <= Attacker
 [DEBUG]  Player.hx | Player | End building.
 ```
