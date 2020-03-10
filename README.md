@@ -144,4 +144,4 @@ Such as:
 
 ## Dependencies
 
-- [sneaker](https://github.com/fal-works/sneaker)
+- [sneaker](https://github.com/fal-works/sneaker) for string/macro utilities
