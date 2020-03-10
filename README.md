@@ -102,6 +102,18 @@ sometimes it might go wrong and raise odd errors due to the reusing of macro con
 
 In that case you may have to reboot it manually (if VSCode, `>Haxe: Restart Language Server`).
 
+### "Override" field
+
+By attaching `@:ripper.override` metadata to fields in a `Spirit` class,  
+you can force them to be copied to `Body` class even if the `Body` already has a field with the same name.
+
+### Caution: Sharing import/using
+
+If any type is used with `import` (or `using`) in a `Spirit` class,
+the module of `Body` class should also import it.
+
+Otherwise you will have "Unresolved identifier" errors.
+
 
 ## Compiler flags
 
