@@ -3,7 +3,10 @@ package ripper.macro.utility;
 import haxe.macro.Type.ClassType;
 
 class ClassTypeExtension {
-	public static function inheritsMetadata(classType: ClassType, metadataName: String): Bool {
+	public static function inheritsMetadata(
+		classType: ClassType,
+		metadataName: String
+	): Bool {
 		final superClass = classType.superClass;
 		if (superClass == null) return false;
 
