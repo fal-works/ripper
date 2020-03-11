@@ -24,6 +24,8 @@ Downside:
 
 ## Usage
 
+### "Spirit", from which the fields are copied
+
 Prepare a class that you want to use as a component of another class.
 
 Implement `ripper.Spirit` interface here.
@@ -36,6 +38,8 @@ class Attacker implements ripper.Spirit {
 }
 ```
 
+### "Body", to which the fields are copied
+
 Then create a class which actually uses the component above.
 
 Implement `ripper.Body` interface here,  
@@ -44,15 +48,18 @@ and specify which class(es) to use in the `@:ripper.spirits` metadata.
 ```haxe
 @:ripper.spirits(Attacker)
 class Player implements ripper.Body {
-	public function new() {}
+	// This class doesn't have the method attack()
+	// but it will be copied from the Attacker class
 }
 ```
 
-Now every field of `Attacker` is copied to `Player`.
+### Result
+
+Now every field of the Spirit class (`Attacker` here) is copied to the Body class (`Player` here).
 
 ```haxe
 class Main {
-	public static function main() {
+	static function main() {
 		final player = new Player();
 		player.attack();
 	}
@@ -79,12 +86,21 @@ Attacker.hx:3: Player attacked!
 ```haxe
 @:ripper.spirits(my_pkg.Attacker, my_pkg.Magician)
 @:ripper.spirits(my_pkg.Attacker.HardAttacker)
+class Player implements ripper.Body { /* ... */ }
 ```
 
 The classes can be specified with:
 - Absolute package path, or
 - Relative package path from the current package  
-(however the parent packages cannot be referred. Only sub-folders).
+(however the parent packages cannot be referred.  
+Only the classes in the same package or its sub-packages).
+
+### Using completion server
+
+If you are using [completion server](https://haxe.org/manual/cr-completion-server.html),
+sometimes it might go wrong and raise odd errors due to the reusing of macro context.
+
+In that case you may have to reboot it manually (if VSCode, `>Haxe: Restart Language Server`).
 
 ### Sharing fields among classes
 
@@ -95,17 +111,10 @@ Although the fields of `Spirit` class are copied to `Body` class,
 fields of super-classes are not copied by this process,  
 thus you can avoid "Duplicate class field declaration" errors here.
 
-### Using completion server
-
-If you are using [completion server](https://haxe.org/manual/cr-completion-server.html),
-sometimes it might go wrong and raise odd errors due to the reusing of macro context.
-
-In that case you may have to reboot it manually (if VSCode, `>Haxe: Restart Language Server`).
-
 ### "Override" field
 
-By attaching `@:ripper.override` metadata to fields in a `Spirit` class,  
-you can force them to be copied to `Body` class even if the `Body` already has a field with the same name.
+By attaching `@:ripper.override` metadata to any field in a `Spirit` class,  
+you can force it to be copied to `Body` class even if the `Body` already has another field with the same name.
 
 ### Caution: Sharing import/using
 
