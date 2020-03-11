@@ -1,7 +1,6 @@
 package ripper.macro;
 
 #if macro
-using Lambda;
 using sneaker.format.StringExtension;
 using ripper.macro.utility.FieldExtension;
 using ripper.macro.utility.ClassTypeExtension;
@@ -113,7 +112,7 @@ class BodyMacro {
 		final fields = SpiritMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
-		if (fields == null) return Failure;
+		if (fields == null) return NotRegistered;
 		if (fields.length == 0) return NoFields;
 		#end
 
@@ -170,15 +169,15 @@ class BodyMacro {
 
 				switch result {
 					case InvalidType:
-						warn('"${typeName}" is an invalid type name.');
+						warn('Invalid type name: ${typeName}');
 					case NotFound:
-						warn('Type "${typeName}" not found.');
+						warn('Type not found: ${typeName}');
 					case NotClass:
-						warn('"${typeName}" is not a class.');
-					case Failure:
-						warn('Failed to get fields data of "${typeName}" for unknown reason.');
+						warn('Not a class: ${typeName}');
+					case NotRegistered:
+						warn('Fields not registered: ${typeName} ... Try restarting completion server.');
 					case NoFields:
-						debug('No fields in "${typeName}".');
+						debug('No fields in class: ${typeName}');
 					case Success:
 						#if !ripper_validation_disable
 						info('Copied fields: ${localClassName.sliceAfterLastDot()} <= ${typeName.sliceAfterLastDot()}');
@@ -200,7 +199,7 @@ private enum MetadataParameterProcessResult {
 	InvalidType;
 	NotFound;
 	NotClass;
-	Failure;
+	NotRegistered;
 	NoFields;
 	Success;
 }
