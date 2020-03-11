@@ -119,9 +119,12 @@ class BodyMacro {
 		for (field in fields) {
 			debug('  - ${field.name}');
 
-			#if !ripper_validation_disable
 			final sameNameField = findFieldIn(localFields, field.name);
 			if (sameNameField != null) {
+				#if ripper_validation_disable
+				debug('    Override field.');
+				localFields.remove(sameNameField);
+				#else
 				if (field.hasMetadata(overrideMetadataName)) {
 					debug('    Override field.');
 					localFields.remove(sameNameField);
@@ -129,8 +132,8 @@ class BodyMacro {
 					warn('    Duplicate field name: ${field.name}');
 					continue;
 				}
+				#end
 			}
-			#end
 
 			final copyingField = Reflect.copy(field);
 			copyingField.pos = Context.currentPos();
