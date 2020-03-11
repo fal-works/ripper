@@ -40,6 +40,7 @@ class BodyMacro {
 				warn('Marked as Body but missing @${spiritsMetadataName} metadata for specifying classes from which to copy fields.');
 			#end
 
+			debug('No @${spiritsMetadataName} metadata. End building.');
 			return null;
 		}
 
