@@ -35,8 +35,10 @@ class BodyMacro {
 		final metadataArray = localClass.meta.extract(spiritsMetadataName);
 
 		if (metadataArray.length == 0) {
+			#if !ripper_validation_disable
 			if (!localClass.inheritsMetadata(spiritsMetadataName))
 				warn('Marked as Body but missing @${spiritsMetadataName} metadata for specifying classes from which to copy fields.');
+			#end
 
 			return null;
 		}
