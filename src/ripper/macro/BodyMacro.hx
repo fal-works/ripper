@@ -4,6 +4,7 @@ package ripper.macro;
 using Lambda;
 using sneaker.format.StringExtension;
 using ripper.macro.utility.FieldExtension;
+using ripper.macro.utility.ClassTypeExtension;
 
 import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;
@@ -13,6 +14,8 @@ import ripper.macro.utility.ContextTools;
 	#end
 
 class BodyMacro {
+	static final spiritsMetadataName = ":ripper.spirits";
+
 	/**
 		A build macro that is run for each `Body` classes.
 		Copies fields from `Spirit` classes that are specified by the `@:spirits` metadata.
@@ -29,10 +32,12 @@ class BodyMacro {
 
 		final localClassName = localClassRef.toString();
 		final localClass = localClassRef.get();
-		final metadataArray = localClass.meta.extract(":ripper.spirits");
+		final metadataArray = localClass.meta.extract(spiritsMetadataName);
 
 		if (metadataArray.length == 0) {
-			warn('Marked as Body but missing @:ripper.spirits metadata for specifying classes from which to copy fields.');
+			if (!localClass.inheritsMetadata(spiritsMetadataName))
+				warn('Marked as Body but missing @${spiritsMetadataName} metadata for specifying classes from which to copy fields.');
+
 			return null;
 		}
 
