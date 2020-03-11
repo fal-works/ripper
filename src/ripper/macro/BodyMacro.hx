@@ -20,15 +20,16 @@ class BodyMacro {
 	macro public static function build(): Null<Fields> {
 		debug('Start to build Body class.');
 
-		final localClass = Context.getLocalClass();
-		if (localClass == null) {
+		final localClassRef = Context.getLocalClass();
+		if (localClassRef == null) {
 			warn('Tried to build something that is not a class.');
 			debug('Go to next.');
 			return null;
 		}
 
-		final localClassName = localClass.toString();
-		final metadataArray = localClass.get().meta.extract(":ripper.spirits");
+		final localClassName = localClassRef.toString();
+		final localClass = localClassRef.get();
+		final metadataArray = localClass.meta.extract(":ripper.spirits");
 
 		if (metadataArray.length == 0) {
 			warn('Marked as Body but missing @:ripper.spirits metadata for specifying classes from which to copy fields.');
