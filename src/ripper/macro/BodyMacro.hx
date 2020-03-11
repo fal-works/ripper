@@ -15,6 +15,7 @@ import ripper.macro.utility.ContextTools;
 
 class BodyMacro {
 	static final spiritsMetadataName = ":ripper.spirits";
+	static final overrideMetadataName = ":ripper.override";
 
 	/**
 		A build macro that is run for each `Body` classes.
@@ -122,7 +123,7 @@ class BodyMacro {
 			#if !ripper_validation_disable
 			final sameNameField = findFieldIn(localFields, field.name);
 			if (sameNameField != null) {
-				if (field.hasMetadata(":ripper.override")) {
+				if (field.hasMetadata(overrideMetadataName)) {
 					debug('    Override field.');
 					localFields.remove(sameNameField);
 				} else {
