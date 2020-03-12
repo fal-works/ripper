@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="278px" preserveAspectRatio="none" style="width:602px;height:278px;" version="1.1" viewBox="0 0 602 278" width="602px" zoomAndPan="magnify"><defs/><g><!--cluster before--><rect fill="#FFFFFF" height="243" style="stroke: #A0A0A0; stroke-width: 1.5;" width="389" x="22" y="24"/><path d="M79,25 L79,34.6094 L69,44.6094 L22,44.6094 " fill="none" style="stroke: #A0A0A0; stroke-width: 1.5;"/><text fill="#A0A0A0" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="47" x="25" y="39.5332">before</text><!--cluster after--><rect fill="#FFFFFF" height="128" style="stroke: #A0A0A0; stroke-width: 1.5;" width="156" x="435" y="139"/><path d="M478,140 L478,149.6094 L468,159.6094 L435,159.6094 " fill="none" style="stroke: #A0A0A0; stroke-width: 1.5;"/><text fill="#A0A0A0" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="33" x="438" y="154.5332">after</text><!--class before.Body--><rect fill="#FFFFFF" height="32" id="before.Body" style="stroke: #202020; stroke-width: 1.5;" width="60" x="323" y="60"/><ellipse cx="338" cy="76" fill="#E6E6FA" rx="11" ry="11" style="stroke: #202020; stroke-width: 1.0;"/><path d="M339.1719,80.7188 L339.9063,80.7188 L339.9063,82.8594 L336.2188,82.8594 L336.2188,80.7188 L336.9531,80.7188 L336.9531,71.375 L336.2188,71.375 L336.2188,69.2344 L339.9063,69.2344 L339.9063,71.375 L339.1719,71.375 L339.1719,80.7188 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="28" x="352" y="80.9102">Body</text><!--class before.Spirit--><rect fill="#FFFFFF" height="32" id="before.Spirit" style="stroke: #202020; stroke-width: 1.5;" width="60" x="70" y="60"/><ellipse cx="85" cy="76" fill="#E6E6FA" rx="11" ry="11" style="stroke: #202020; stroke-width: 1.0;"/><path d="M86.1719,80.7188 L86.9063,80.7188 L86.9063,82.8594 L83.2188,82.8594 L83.2188,80.7188 L83.9531,80.7188 L83.9531,71.375 L83.2188,71.375 L83.2188,69.2344 L86.9063,69.2344 L86.9063,71.375 L86.1719,71.375 L86.1719,80.7188 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="28" x="99" y="80.9102">Spirit</text><!--class before.YourBody--><rect fill="#FFFFFF" height="75.6719" id="before.YourBody" style="stroke: #202020; stroke-width: 1.5;" width="84" x="311" y="175"/><ellipse cx="326" cy="191" fill="#ADD1B2" rx="11" ry="11" style="stroke: #202020; stroke-width: 1.0;"/><path d="M329.6875,192.2031 Q329.4375,195.6875 328.2969,196.8438 Q327.2656,197.8594 325.8594,197.8594 Q324.4531,197.8594 323.4219,196.8438 Q321.6719,195.0781 321.6719,191.4063 Q321.6719,187.1563 323.5469,185.25 Q324.5938,184.2344 325.9219,184.2344 Q327.3281,184.2344 328.1719,185.0469 Q329.6563,186.5625 329.5781,189.4375 L327.4531,189.4375 Q327.375,187.1094 326.7344,186.4688 Q326.4531,186.1719 325.9219,186.1719 Q325.4688,186.1719 325.1094,186.5469 Q323.875,187.7656 323.875,191.2813 Q323.875,194.3281 324.9219,195.3438 Q325.3438,195.7813 325.8594,195.7813 Q326.3125,195.7813 326.75,195.3438 Q327.3125,194.7969 327.3906,192.2031 L329.6875,192.2031 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="52" x="340" y="195.9102">YourBody</text><line style="stroke: #202020; stroke-width: 1.5;" x1="312" x2="394" y1="207" y2="207"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="4" x="317" y="222.4189">-</text><line style="stroke: #202020; stroke-width: 1.5;" x1="312" x2="394" y1="228.8359" y2="228.8359"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="4" x="317" y="244.2549">-</text><!--class before.YourSpirit--><rect fill="#FFFFFF" height="75.6719" id="before.YourSpirit" style="stroke: #202020; stroke-width: 1.5;" width="124" x="38" y="175"/><ellipse cx="70.55" cy="191" fill="#ADD1B2" rx="11" ry="11" style="stroke: #202020; stroke-width: 1.0;"/><path d="M74.2375,192.2031 Q73.9875,195.6875 72.8469,196.8438 Q71.8156,197.8594 70.4094,197.8594 Q69.0031,197.8594 67.9719,196.8438 Q66.2219,195.0781 66.2219,191.4063 Q66.2219,187.1563 68.0969,185.25 Q69.1438,184.2344 70.4719,184.2344 Q71.8781,184.2344 72.7219,185.0469 Q74.2063,186.5625 74.1281,189.4375 L72.0031,189.4375 Q71.925,187.1094 71.2844,186.4688 Q71.0031,186.1719 70.4719,186.1719 Q70.0188,186.1719 69.6594,186.5469 Q68.425,187.7656 68.425,191.2813 Q68.425,194.3281 69.4719,195.3438 Q69.8938,195.7813 70.4094,195.7813 Q70.8625,195.7813 71.3,195.3438 Q71.8625,194.7969 71.9406,192.2031 L74.2375,192.2031 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="53" x="88.45" y="195.9102">YourSpirit</text><line style="stroke: #202020; stroke-width: 1.5;" x1="39" x2="161" y1="207" y2="207"/><ellipse cx="49" cy="218" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="58" y="222.4189">someValue: Int</text><line style="stroke: #202020; stroke-width: 1.5;" x1="39" x2="161" y1="228.8359" y2="228.8359"/><ellipse cx="49" cy="239.8359" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="98" x="58" y="244.2549">doSomething(): Void</text><!--class after.YourBody--><rect fill="#FFFFFF" height="75.6719" id="after.YourBody" style="stroke: #202020; stroke-width: 1.5;" width="124" x="451" y="175"/><ellipse cx="484" cy="191" fill="#ADD1B2" rx="11" ry="11" style="stroke: #202020; stroke-width: 1.0;"/><path d="M487.6875,192.2031 Q487.4375,195.6875 486.2969,196.8438 Q485.2656,197.8594 483.8594,197.8594 Q482.4531,197.8594 481.4219,196.8438 Q479.6719,195.0781 479.6719,191.4063 Q479.6719,187.1563 481.5469,185.25 Q482.5938,184.2344 483.9219,184.2344 Q485.3281,184.2344 486.1719,185.0469 Q487.6563,186.5625 487.5781,189.4375 L485.4531,189.4375 Q485.375,187.1094 484.7344,186.4688 Q484.4531,186.1719 483.9219,186.1719 Q483.4688,186.1719 483.1094,186.5469 Q481.875,187.7656 481.875,191.2813 Q481.875,194.3281 482.9219,195.3438 Q483.3438,195.7813 483.8594,195.7813 Q484.3125,195.7813 484.75,195.3438 Q485.3125,194.7969 485.3906,192.2031 L487.6875,192.2031 Z "/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="52" x="502" y="195.9102">YourBody</text><line style="stroke: #202020; stroke-width: 1.5;" x1="452" x2="574" y1="207" y2="207"/><ellipse cx="462" cy="218" fill="none" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="471" y="222.4189">someValue: Int</text><line style="stroke: #202020; stroke-width: 1.5;" x1="452" x2="574" y1="228.8359" y2="228.8359"/><ellipse cx="462" cy="239.8359" fill="#84BE84" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="98" x="471" y="244.2549">doSomething(): Void</text><!--reverse link before.Body to before.YourBody--><path d="M353,112.536 C353,131.771 353,155.508 353,174.969 " fill="none" id="before.Body&lt;-before.YourBody" style="stroke: #202020; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="346,112.224,353,92.224,360,112.224,346,112.224" style="stroke: #202020; stroke-width: 1.0;"/><!--reverse link before.Spirit to before.YourSpirit--><path d="M100,112.536 C100,131.771 100,155.508 100,174.969 " fill="none" id="before.Spirit&lt;-before.YourSpirit" style="stroke: #202020; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="93.0001,112.224,100,92.224,107,112.224,93.0001,112.224" style="stroke: #202020; stroke-width: 1.0;"/><!--link before.YourSpirit to before.YourBody--><!--link before.YourBody to before.YourSpirit--><path d="M310.79,229.4309 C304.412,231.3214 297.844,232.9467 291.5,234 C243.271,242.0072 230.001,240.1482 181.5,234 C176.923,233.4198 172.234,232.6631 167.532,231.7825 " fill="none" id="before.YourBody-&gt;before.YourSpirit" style="stroke: #202020; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#202020" points="162.429,230.7806,170.4886,236.4412,167.3351,231.7449,172.0315,228.5914,162.429,230.7806" style="stroke: #202020; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="108" x="182.5" y="230.4951">refers by metadata</text><!--link before.YourSpirit to before.YourBody--><path d="M162.19,194.9483 C168.003,193.7535 173.837,192.7353 179.5,192 C229.745,185.4758 243.561,183.4458 293.5,192 C297.613,192.7045 301.819,193.6644 306,194.788 " fill="none" id="before.YourSpirit-&gt;before.YourBody" style="stroke: #202020; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#202020" points="310.89,196.1767,303.3249,189.8705,306.0801,194.8109,301.1397,197.5662,310.89,196.1767" style="stroke: #202020; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="62" x="205.5" y="182.4951">copy fields</text><!--link before.YourBody to after.YourBody--><!--
+@startuml overview
+
+
+skinparam shadowing false
+skinparam backgroundColor White
+skinparam package {
+  BorderColor #A0A0A0
+  FontColor #A0A0A0
+}
+skinparam class {
+  BackgroundColor White
+  ArrowColor #202020
+  BorderColor #202020
+  FontColor #000000
+}
+skinparam note {
+  BackgroundColor White
+  FontColor #606060
+  BorderColor #C0C0C0
+}
+skinparam stereotypeIBackgroundColor Lavender
+hide empty members
+
+
+skinparam packageStyle Frame
+
+namespace before {
+  interface Body
+  interface Spirit
+
+  class YourBody {
+    {method} -
+    {field} -
+  }
+  class YourSpirit {
+    + someValue: Int
+    + doSomething(): Void
+  }
+
+  Body <|.. YourBody
+  Spirit <|.. YourSpirit
+
+  YourSpirit - -[hidden]- - YourBody : zzzzzzzzzzzzzzzz
+  YourSpirit <.right. YourBody : refers by metadata
+  YourSpirit .right.> YourBody : copy fields
+}
+
+after.YourBody -left[hidden]- before.YourBody
+
+namespace after {
+  class YourBody {
+    + someValue: Int
+    + doSomething(): Void
+  }
+}
+
+@enduml
+
+PlantUML version 1.2019.09(Tue Aug 27 01:19:51 GMT+09:00 2019)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 1.8.0_242-b08
+Operating System: Windows 10
+OS Version: 10.0
+Default Encoding: MS932
+Language: ja
+Country: JP
+--></g></svg>

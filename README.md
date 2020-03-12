@@ -10,6 +10,8 @@ Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
 
 ## Features
 
+![(class diagram)](./docs/overview.svg)
+
 What it does is just copying fields from a class to another, using the `@:autoBuild` macro.
 
 Remarks:

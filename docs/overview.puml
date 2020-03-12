@@ -1,0 +1,59 @@
+@startuml overview
+
+' ---- (style) --------------------------------
+
+skinparam shadowing false
+skinparam backgroundColor White
+skinparam package {
+  BorderColor #A0A0A0
+  FontColor #A0A0A0
+}
+skinparam class {
+  BackgroundColor White
+  ArrowColor #202020
+  BorderColor #202020
+  FontColor #000000
+}
+skinparam note {
+  BackgroundColor White
+  FontColor #606060
+  BorderColor #C0C0C0
+}
+skinparam stereotypeIBackgroundColor Lavender
+hide empty members
+
+' ---- (diagram) ------------------------------
+
+skinparam packageStyle Frame
+
+namespace before {
+  interface Body
+  interface Spirit
+
+  class YourBody {
+    {method} -
+    {field} -
+  }
+  class YourSpirit {
+    + someValue: Int
+    + doSomething(): Void
+  }
+
+  Body <|.. YourBody
+  Spirit <|.. YourSpirit
+
+  YourSpirit --[hidden]-- YourBody : zzzzzzzzzzzzzzzz
+  YourSpirit <.right. YourBody : refers by metadata
+  YourSpirit .right.> YourBody : copy fields
+}
+
+after.YourBody -left[hidden]- before.YourBody
+
+namespace after {
+  class YourBody {
+    + someValue: Int
+    + doSomething(): Void
+  }
+}
+
+@enduml
