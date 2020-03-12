@@ -4,6 +4,7 @@ package ripper.macro;
 using sneaker.format.StringExtension;
 using sneaker.macro.FieldExtension;
 using sneaker.macro.ClassTypeExtension;
+using ripper.macro.utility.ClassTypeExtension;
 
 import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;
@@ -15,6 +16,7 @@ import ripper.macro.utility.ContextTools;
 class BodyMacro {
 	static final spiritsMetadataName = ":ripper.spirits";
 	static final overrideMetadataName = ":ripper.override";
+	static final spiritInterfaceName = "ripper.Spirit";
 
 	/**
 		A build macro that is run for each `Body` classes.
@@ -108,6 +110,7 @@ class BodyMacro {
 
 		#if !ripper_validation_disable
 		if (classType == null) return NotClass;
+		if (!classType.implementsInterface(spiritInterfaceName)) return NotSpirit;
 		#end
 
 		debug('Resolved type as a class: ${classType.name}');
@@ -180,6 +183,8 @@ class BodyMacro {
 						warn('Type not found: ${typeName}');
 					case NotClass:
 						warn('Not a class: ${typeName}');
+					case NotSpirit:
+						warn('Specified by metadata but does not implement ripper.Spirit: $typeName');
 					case NotRegistered:
 						warn('Fields not registered: ${typeName} ... Try restarting completion server.');
 					case NoFields:
@@ -205,6 +210,7 @@ private enum MetadataParameterProcessResult {
 	InvalidType;
 	NotFound;
 	NotClass;
+	NotSpirit;
 	NotRegistered;
 	NoFields;
 	Success;
