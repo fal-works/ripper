@@ -10,7 +10,7 @@ class SpiritMacro {
 		Used as a buffer for storing fields that will be copied to `Body` classes.
 	**/
 	@:persistent public static final fieldsMap = {
-		debugWithoutContext('Initialize Spirit fields map.');
+		debug('Initialize Spirit fields map.');
 		new StringMap<Array<Field>>();
 	}
 

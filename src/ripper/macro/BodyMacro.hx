@@ -2,8 +2,8 @@ package ripper.macro;
 
 #if macro
 using sneaker.format.StringExtension;
-using ripper.macro.utility.FieldExtension;
-using ripper.macro.utility.ClassTypeExtension;
+using sneaker.macro.FieldExtension;
+using sneaker.macro.ClassTypeExtension;
 
 import haxe.macro.ExprTools;
 import haxe.macro.Type.ClassType;
@@ -36,7 +36,7 @@ class BodyMacro {
 
 		if (metadataArray.length == 0) {
 			#if !ripper_validation_disable
-			if (!localClass.inheritsMetadata(spiritsMetadataName))
+			if (!localClass.anySuperClassHasMetadata(spiritsMetadataName))
 				warn('Marked as Body but missing @${spiritsMetadataName} metadata for specifying classes from which to copy fields.');
 			#end
 

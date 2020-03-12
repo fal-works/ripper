@@ -9,5 +9,4 @@
 -main Test
 
 # -D ripper_validation_disable
-# -D ripper_log_disable
--D ripper_log_debug
+# -D sneaker_macro_log_level=500

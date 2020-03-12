@@ -126,25 +126,25 @@ Otherwise you will have "Unresolved identifier" errors.
 
 ## Compiler flags
 
-|flag|description|
-|---|---|
-|ripper_validation_disable|Disables all validation during the compilation.|
-|ripper_log_disable|Disables printing logs (excluding the warning compilation message).|
-|ripper_log_debug|Enables printing logs of Debug level.|
+|library|flag|description|
+|---|---|---|
+|ripper|ripper_validation_disable|Disables all validation during the compilation.|
+|sneaker|sneaker_macro_log_level|Less than 300 for hiding log including WARN. 500 or more for showing all logs.|
+|sneaker|sneaker_macro_message_level|Similar to above, but related to compiler messages. Not related to DEBUG logs.|
 
-### Disable validation/log
+### Disabling validation/log
 
-If you are sure that your code works fine,  
-you may want to disable the debugging features with the following flags:
+If you are sure that your code works fine and doesn't need warning messages,  
+you might want to disable the debugging features with following flags:
 
-`-D ripper_validation_disable`
-`-D ripper_log_disable`
+- Setting `ripper_validation_disable`
+- Low values (less than `300`) for `sneaker_macro_log_level` and `sneaker_macro_message_level`
 
-### Debug log
+### Debug logs
 
-With the flag `-D ripper_log_debug` set, you can see more detailed log messages when compiling.
+With the flag `sneaker_macro_log_level` you can also see more detailed log messages when compiling.
 
-Such as:
+If `500` or more (this will include all DEBUG logs), for example:
 
 ```
 [DEBUG]  Initialize Spirit fields map. (ripper.macro.SpiritMacro::fieldsMap)
@@ -167,4 +167,4 @@ Such as:
 
 ## Dependencies
 
-- [sneaker](https://github.com/fal-works/sneaker) for string/macro utilities
+- [sneaker](https://github.com/fal-works/sneaker) for logging and string/macro utilities
