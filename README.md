@@ -118,6 +118,17 @@ thus you can avoid "Duplicate class field declaration" errors here.
 By attaching `@:ripper.override` metadata to any field in a `Spirit` class,  
 you can force it to be copied to `Body` class even if the `Body` already has another field with the same name.
 
+### Verify a class
+
+By adding `@:ripper.verified` metadata to a class that implements `Body` or `Spirit`,  
+you can suppress INFO/DEBUG logs and some validations regardless of the compiler flag settings.
+
+### Preserve Spirit class
+
+At default, a class that implements `Spirit` is excluded from compilation as it is unlikely that it will be used alone.
+
+Add `@:ripper.preserve` metadata to the class to avoid this.
+
 ### Caution: Sharing import/using
 
 If any type is used with `import` (or `using`) in a `Spirit` class,
@@ -137,7 +148,7 @@ Otherwise you will have "Unresolved identifier" errors.
 ### Disabling validation/log
 
 If you are sure that your code works fine and doesn't need warning messages,  
-you might want to disable the debugging features with following flags:
+you might want to disable all debugging features with following flags:
 
 - Setting `ripper_validation_disable`
 - Low values (less than `300`) for `sneaker_macro_log_level` and `sneaker_macro_message_level`
