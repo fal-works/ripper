@@ -34,14 +34,14 @@ class ContextTools {
 
 		if (module != null) {
 			// classPath == modulePath
-			debug('  ${classPath} => Found.');
+			if (notVerified) debug('  ${classPath} => Found.');
 
 			found = findClassyTypeIn(module, classPath);
 			if (found != null) return found;
 
-			debug('    Type not found in that module.');
+			if (notVerified) debug('    Type not found in that module.');
 		} else {
-			debug('  ${classPath} => Not found.');
+			if (notVerified) debug('  ${classPath} => Not found.');
 		}
 
 		final lastDotIndex = classPath.lastIndexOfDot();
@@ -50,7 +50,7 @@ class ContextTools {
 
 		if (module != null) {
 			// classPath = modulePath.subClassName
-			debug('  ${beforeLastDot} => Found.');
+			if (notVerified) debug('  ${beforeLastDot} => Found.');
 
 			final secondLastDotIndex = beforeLastDot.lastIndexOfDot();
 			final beforeSecondDot = beforeLastDot.substr(0, secondLastDotIndex);
@@ -58,9 +58,9 @@ class ContextTools {
 			found = findClassyTypeIn(module, subclassPath);
 			if (found != null) return found;
 
-			debug('    Type not found in that module.');
+			if (notVerified) debug('    Type not found in that module.');
 		} else {
-			debug('  ${beforeLastDot} => Not found.');
+			if (notVerified) debug('  ${beforeLastDot} => Not found.');
 		}
 
 		return null;
@@ -73,7 +73,7 @@ class ContextTools {
 		@return Class instance as `haxe.macro.Type`. `null` if not found.
 	**/
 	public static function findClassyType(classPath: String): Null<MacroType> {
-		debug("Resolving module...");
+		if (notVerified) debug("Resolving module...");
 
 		final type = findClassyTypeOrSubType(classPath);
 		if (type != null) return type;

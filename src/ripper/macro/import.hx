@@ -5,6 +5,7 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.TypeTools;
 import sneaker.macro.Types;
-import sneaker.macro.MacroLogger.*;
 import ripper.macro.Constants.*;
+import sneaker.macro.MacroLogger.*;
+import ripper.macro.RipperContext.*;
 #end

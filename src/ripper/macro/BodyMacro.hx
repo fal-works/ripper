@@ -19,35 +19,38 @@ class BodyMacro {
 		Copies fields from `Spirit` classes that are specified by the `@:spirits` metadata.
 	**/
 	macro public static function build(): Null<Fields> {
-		debug('Start to build Body class.');
-
 		final localClassRef = Context.getLocalClass();
 		if (localClassRef == null) {
 			warn('Tried to build something that is not a class.');
-			debug('Go to next.');
+			return null;
+		}
+
+		final localClass = localClassRef.get();
+		setVerificationState(localClass);
+
+		if (notVerified) debug('Start to build Body class.');
+
+		final spiritsMetadataArray = localClass.meta.extract(spiritsMetadataName);
+
+		if (spiritsMetadataArray.length == 0) {
+			#if !ripper_validation_disable
+			if (notVerified) {
+				if (!localClass.anySuperClassHasMetadata(spiritsMetadataName))
+					warn('Marked as Body but missing @${spiritsMetadataName} metadata for specifying classes from which to copy fields.');
+				#end
+
+				debug('No @${spiritsMetadataName} metadata. End building.');
+			}
 			return null;
 		}
 
 		final localClassName = localClassRef.toString();
-		final localClass = localClassRef.get();
-		final metadataArray = localClass.meta.extract(spiritsMetadataName);
-
-		if (metadataArray.length == 0) {
-			#if !ripper_validation_disable
-			if (!localClass.anySuperClassHasMetadata(spiritsMetadataName))
-				warn('Marked as Body but missing @${spiritsMetadataName} metadata for specifying classes from which to copy fields.');
-			#end
-
-			debug('No @${spiritsMetadataName} metadata. End building.');
-			return null;
-		}
-
-		final result: Null<Fields> = processAllMetadata(
+		final result: Null<Fields> = processAllSpiritsMetadata(
 			localClassName,
-			metadataArray
+			spiritsMetadataArray
 		);
 
-		debug('End building.');
+		if (notVerified) debug('End building.');
 		return result;
 	}
 
@@ -56,12 +59,17 @@ class BodyMacro {
 		This process is necessary for invoking the build macro of `type` if not yet called.
 	**/
 	static function resolveClass(type: MacroType, typeName: String): Null<ClassType> {
+		var classType: Null<ClassType>;
 		try {
-			final classType = TypeTools.getClass(type);
-			return classType;
+			classType = TypeTools.getClass(type);
 		} catch (e:Dynamic) {
-			return null;
+			classType = null;
 		}
+
+		// Set again as the state may be changed by the resolved class.
+		setVerificationState(Context.getLocalClass().get());
+
+		return classType;
 	}
 
 	/**
@@ -82,17 +90,16 @@ class BodyMacro {
 		Parse a metadata parameter as a class name,
 		and adds the fields of that class to `localFields`.
 	**/
-	static function processMetadataParameter(
+	static function processSpiritsMetadataParameter(
 		parameter: Expr,
 		parameterString: String,
 		localFields: Array<Field>
 	): MetadataParameterProcessResult {
 		#if !ripper_validation_disable
-		final validated = validateDomainName(parameter);
-		if (validated == null) return InvalidType;
+		if (notVerified && validateDomainName(parameter) == null) return InvalidType;
 		#end
 
-		debug('Start to search type: ${parameterString}');
+		if (notVerified) debug('Start to search type: ${parameterString}');
 
 		final type = ContextTools.findClassyType(parameterString);
 		#if !ripper_validation_disable
@@ -100,17 +107,23 @@ class BodyMacro {
 		#end
 
 		final fullTypeName = TypeTools.toString(type);
-		debug('Found type: ${fullTypeName}');
-		debug('Resolving as a class.');
+		if (notVerified) {
+			debug('Found type: ${fullTypeName}');
+			debug('Resolving as a class.');
+		}
 		final classType = resolveClass(type, fullTypeName);
 
 		#if !ripper_validation_disable
-		if (classType == null) return NotClass;
-		if (!classType.implementsInterface(spiritInterfaceName)) return NotSpirit;
+		if (notVerified) {
+			if (classType == null) return NotClass;
+			if (!classType.implementsInterface(spiritInterfaceName)) return NotSpirit;
+		}
 		#end
 
-		debug('Resolved type as a class: ${classType.name}');
-		debug('Copying fields...');
+		if (notVerified) {
+			debug('Resolved type as a class: ${classType.name}');
+			debug('Copying fields...');
+		}
 		final fields = SpiritMacro.fieldsMap.get(fullTypeName);
 
 		#if !ripper_validation_disable
@@ -119,16 +132,16 @@ class BodyMacro {
 		#end
 
 		for (field in fields) {
-			debug('  - ${field.name}');
+			if (notVerified) debug('  - ${field.name}');
 
 			final sameNameField = findFieldIn(localFields, field.name);
 			if (sameNameField != null) {
 				#if ripper_validation_disable
-				debug('    Override field.');
+				if (notVerified) debug('    Override field.');
 				localFields.remove(sameNameField);
 				#else
 				if (field.hasMetadata(overrideMetadataName)) {
-					debug('    Override field.');
+					if (notVerified) debug('    Override field.');
 					localFields.remove(sameNameField);
 				} else {
 					warn('    Duplicate field name: ${field.name}');
@@ -146,9 +159,9 @@ class BodyMacro {
 	}
 
 	/**
-		Process the given metadata array and calls `processMetadataParameter()` for each parameter.
+		Process the given metadata array and calls `processSpiritsMetadataParameter()` for each parameter.
 	**/
-	static function processAllMetadata(
+	static function processAllSpiritsMetadata(
 		localClassName: String,
 		metadataArray: Array<MetadataEntry>
 	): Null<Fields> {
@@ -159,14 +172,13 @@ class BodyMacro {
 			#if !ripper_validation_disable
 			if (metadataParameters == null) {
 				warn("Found metadata without arguments.");
-				debug('Go to next.');
 				continue;
 			}
 			#end
 			for (parameter in metadataParameters) {
 				final typeName = ExprTools.toString(parameter);
-				debug('Start to process metadata parameter: ${typeName}');
-				final result = processMetadataParameter(
+				if (notVerified) debug('Start to process metadata parameter: ${typeName}');
+				final result = processSpiritsMetadataParameter(
 					parameter,
 					typeName,
 					localFields
@@ -184,13 +196,15 @@ class BodyMacro {
 					case NotRegistered:
 						warn('Fields not registered: ${typeName} ... Try restarting completion server.');
 					case NoFields:
-						debug('No fields in class: ${typeName}');
+						if (notVerified) debug('No fields in class: ${typeName}');
 					case Success:
-						#if !ripper_validation_disable
-						info('Copied fields: ${localClassName.sliceAfterLastDot()} <= ${typeName.sliceAfterLastDot()}');
-						#else
-						info('Processed metadata parameter: ${typeName}');
-						#end
+						if (notVerified) {
+							#if !ripper_validation_disable
+							info('Copied fields: ${localClassName.sliceAfterLastDot()} <= ${typeName.sliceAfterLastDot()}');
+							#else
+							info('Processed metadata parameter: ${typeName}');
+							#end
+						}
 				}
 			}
 		}
@@ -200,7 +214,7 @@ class BodyMacro {
 }
 
 /**
-	Kind of result that `BodyMacro.processMetadataParameter()` returns.
+	Kind of result that `BodyMacro.processSpiritsMetadataParameter()` returns.
 **/
 private enum MetadataParameterProcessResult {
 	InvalidType;
