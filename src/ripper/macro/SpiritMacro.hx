@@ -26,7 +26,8 @@ class SpiritMacro {
 			return null;
 		}
 
-		setVerificationState(localClassRef.get());
+		final localClass = localClassRef.get();
+		setVerificationState(localClass);
 
 		if (notVerified) debug('Start registration of Spirit fields.');
 
@@ -45,8 +46,12 @@ class SpiritMacro {
 		else
 			warn('Marked as Spirit but no fields for copying to Body.');
 
-		Compiler.exclude(localTypePath, false);
-		if (notVerified) debug('Exclude this type from compilation. End registration.');
+		if (!localClass.meta.has(preserveMetadataName)) {
+			if (notVerified) debug('Exclude this type from compilation.');
+			Compiler.exclude(localTypePath, false);
+		}
+
+		if (notVerified) debug('End registration.');
 
 		return null;
 	}
