@@ -6,7 +6,7 @@
 	"description": "Small library for building up classes from reusable components (also called Mixin or Partial Implementation)",
 	"version": "0.2.1",
 	"classPath": "src/",
-	"releasenote": "Sync with sneaker library. More friendly warning message.",
+	"releasenote": "Fix library dependency.",
 	"contributors": [
 		"fal-works"
 	],
