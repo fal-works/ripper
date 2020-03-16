@@ -14,10 +14,6 @@ import ripper.macro.utility.ContextTools;
 	#end
 
 class BodyMacro {
-	static final spiritsMetadataName = ":ripper.spirits";
-	static final overrideMetadataName = ":ripper.override";
-	static final spiritInterfaceName = "ripper.Spirit";
-
 	/**
 		A build macro that is run for each `Body` classes.
 		Copies fields from `Spirit` classes that are specified by the `@:spirits` metadata.
