@@ -19,8 +19,9 @@ Remarks:
 - Source code with every function commented
 - Friendly debug log mode (see "Compiler flags" below)
 
-Downside:
+Caveats:
 
+- This is nothing but reinventing the wheel!
 - Developed within a few days and haven't considered many usecases yet
 
 
@@ -180,4 +181,4 @@ If `500` or more (this will include all DEBUG logs), for example:
 
 ## Dependencies
 
-- [sneaker](https://github.com/fal-works/sneaker) for logging and string/macro utilities
+- [sneaker](https://github.com/fal-works/sneaker) (v0.6.0) for logging and string/macro utilities
