@@ -41,10 +41,11 @@ class SpiritMacro {
 
 		final localFields = Context.getBuildFields();
 		fieldsMap.set(localTypePath, localFields);
-		if (localFields.length > 0)
+		if (localFields.length > 0) {
 			if (notVerified) debug('Registered Spirit fields for copying to Body.');
-		else
+		} else {
 			warn('Marked as Spirit but no fields for copying to Body.');
+		}
 
 		if (!localClass.meta.has(preserveMetadataName)) {
 			if (notVerified) debug('Exclude this type from compilation.');
