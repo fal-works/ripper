@@ -4,13 +4,13 @@
 	"license": "MIT",
 	"tags": ["utility", "macro"],
 	"description": "Small library for building up classes from reusable components (also called Mixin or Partial Implementation)",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"classPath": "src/",
-	"releasenote": "Fix library dependency.",
+	"releasenote": "Update library dependency.",
 	"contributors": [
 		"fal-works"
 	],
 	"dependencies": {
-		"sneaker": "0.6.0"
+		"sneaker": "0.7.0"
 	}
 }
