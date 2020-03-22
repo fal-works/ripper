@@ -2,7 +2,7 @@ package ripper.macro.utility;
 
 #if macro
 using sneaker.format.StringExtension;
-using sneaker.macro.TypeExtension;
+using sneaker.macro.extensions.TypeExtension;
 
 import haxe.macro.Context;
 import sneaker.macro.ContextTools.tryGetModule;

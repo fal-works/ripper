@@ -2,8 +2,8 @@ package ripper.macro;
 
 #if macro
 using sneaker.format.StringExtension;
-using sneaker.macro.FieldExtension;
-using sneaker.macro.ClassTypeExtension;
+using sneaker.macro.extensions.FieldExtension;
+using sneaker.macro.extensions.ClassTypeExtension;
 using ripper.macro.utility.ClassTypeExtension;
 
 import haxe.macro.ExprTools;
