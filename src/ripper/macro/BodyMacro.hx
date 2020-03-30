@@ -30,12 +30,14 @@ class BodyMacro {
 
 		if (notVerified) debug('Start to build Body class.');
 
-		final spiritsMetadataArray = localClass.meta.extract(spiritsMetadataName);
+		final localMeta = localClass.meta;
+		final spiritsMetadataArray = localMeta.extract(spiritsMetadataName)
+			.concat(localMeta.extract(spiritsMetadataName_));
 
 		if (spiritsMetadataArray.length == 0) {
 			if (notVerified) {
 				#if !ripper_validation_disable
-				if (!localClass.anySuperClassHasMetadata(spiritsMetadataName))
+				if (!localClass.anySuperClassHasMetadata(spiritsMetadataName) || !localClass.anySuperClassHasMetadata(spiritsMetadataName_))
 					warn('Marked as Body but missing @${spiritsMetadataName} metadata for specifying classes from which to copy fields.');
 				else
 				#end
@@ -140,7 +142,7 @@ class BodyMacro {
 				if (notVerified) debug('    Override field.');
 				localFields.remove(sameNameField);
 				#else
-				if (field.hasMetadata(overrideMetadataName)) {
+				if (field.hasMetadata(overrideMetadataName) || field.hasMetadata(overrideMetadataName_)) {
 					if (notVerified) debug('    Override field.');
 					localFields.remove(sameNameField);
 				} else {

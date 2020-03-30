@@ -22,7 +22,8 @@ class RipperContext {
 		Sets `verified` and `notVerified` according to the `@:ripper.verified` metadata.
 	**/
 	public static function setVerificationState(classType: ClassType): Void {
-		verified = (classType.meta.has(verifiedMetadataName));
+		final meta = classType.meta;
+		verified = (meta.has(verifiedMetadataName) || meta.has(verifiedMetadataName_));
 		notVerified = !verified;
 	}
 }

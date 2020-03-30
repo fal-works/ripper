@@ -47,7 +47,8 @@ class SpiritMacro {
 			warn('Marked as Spirit but no fields for copying to Body.');
 		}
 
-		if (!localClass.meta.has(preserveMetadataName)) {
+		final localMeta = localClass.meta;
+		if (!(localMeta.has(preserveMetadataName) || localMeta.has(preserveMetadataName_))) {
 			if (notVerified) debug('Exclude this type from compilation.');
 			Compiler.exclude(localTypePath, false);
 		}
