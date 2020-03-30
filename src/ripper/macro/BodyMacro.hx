@@ -18,7 +18,7 @@ class BodyMacro {
 		A build macro that is run for each `Body` classes.
 		Copies fields from `Spirit` classes that are specified by the `@:spirits` metadata.
 	**/
-	macro public static function build(): Null<Fields> {
+	public static macro function build(): Null<Fields> {
 		final localClassRef = Context.getLocalClass();
 		if (localClassRef == null) {
 			warn('Tried to build something that is not a class.');
