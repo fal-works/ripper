@@ -181,4 +181,4 @@ If `500` or more (this will include all DEBUG logs), for example:
 
 ## Dependencies
 
-- [sneaker](https://github.com/fal-works/sneaker) (v0.7.0) for logging and string/macro utilities
+- [sneaker](https://github.com/fal-works/sneaker) (v0.8.0) for logging and string/macro utilities
