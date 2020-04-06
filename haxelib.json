@@ -3,14 +3,14 @@
 	"url": "https://github.com/fal-works/ripper/",
 	"license": "MIT",
 	"tags": ["utility", "macro"],
-	"description": "Small library for building up classes from reusable components (also called Mixin or Partial Implementation)",
-	"version": "0.2.3",
+	"description": "A small library to help you create classes (more specifically: helps partial implementation and data class building).",
+	"version": "0.3.0",
 	"classPath": "src/",
-	"releasenote": "Accept underscore-separated metadata. Update library dependency.",
+	"releasenote": "Add data-class feature.",
 	"contributors": [
 		"fal-works"
 	],
 	"dependencies": {
-		"sneaker": "0.8.0"
+		"sneaker": "0.8.1"
 	}
 }
