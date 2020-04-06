@@ -5,5 +5,12 @@ class Test {
 		player.magic();
 		player.attackHard();
 		player.heal();
+
+		final data: MyData = {
+			myInt: 1,
+			myFloat: 2.0,
+			myString: "a"
+		}
+		trace(data.myInt);
 	}
 }

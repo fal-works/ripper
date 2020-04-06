@@ -1,31 +1,44 @@
 # ripper
 
-A small library for building up classes from reusable components  
-(which is also called Mixin or Partial Implementation).
+A small library to help you create classes.
 
-Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
 
 **Requires Haxe 4** (tested with v4.0.5).
 
 
 ## Features
 
+### Partial implementation
+
+Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
+
 ![(Class diagram. Visit the GitHub repo for details.)](./docs/overview.svg)
 
 What it does is just copying fields from a class to another, using the `@:autoBuild` macro.
 
-Remarks:
+### Data class
+
+Completes the constructor of any class according to non-initialized variables.
+
+Similar to [this](https://code.haxe.org/category/macros/build-value-objects.html), but some enhancements as below:
+
+- Ignores variables that already have initial values.
+- Respects and integrates existing constructor (if exists).
+
+### Overall
 
 - Source code with every function commented
 - Friendly debug log mode (see "Compiler flags" below)
 
-Caveats:
+
+
+## Caveats
 
 - This is nothing but reinventing the wheel!
 - Developed within a few days and haven't considered many usecases yet
 
 
-## Usage
+## Usage > Body & Spirit
 
 ### "Spirit", from which the fields are copied
 
@@ -78,9 +91,9 @@ Finally the output below
 Attacker.hx:3: Player attacked!
 ```
 
-## More details
+### More details
 
-### Metadata `@:ripper.spirits()` syntax
+#### Metadata `@:ripper.spirits()` syntax
 
 - It can also have multiple parameters.
 - You can write multiple `@:ripper.spirits()` lines as well.
@@ -98,14 +111,14 @@ The classes can be specified with:
 (however the parent packages cannot be referred.  
 Only the classes in the same package or its sub-packages).
 
-### Using completion server
+#### Using completion server
 
 If you are using [completion server](https://haxe.org/manual/cr-completion-server.html),
 sometimes it might go wrong and raise odd errors due to the reusing of macro context.
 
 In that case you may have to reboot it manually (if VSCode, `>Haxe: Restart Language Server`).
 
-### Sharing fields among classes
+#### Sharing fields among classes
 
 To share the same fields between `Body`/`Spirit` classes,  
 create another base class that has the fields, and let `Body`/`Spirit` classes extend it.
@@ -114,29 +127,61 @@ Although the fields of `Spirit` class are copied to `Body` class,
 fields of super-classes are not copied by this process,  
 thus you can avoid "Duplicate class field declaration" errors here.
 
-### "Override" field
+#### "Override" field
 
 By attaching `@:ripper.override` metadata to any field in a `Spirit` class,  
 you can force it to be copied to `Body` class even if the `Body` already has another field with the same name.
 
-### Verify a class
+#### Verify a class
 
 By adding `@:ripper.verified` metadata to a class that implements `Body` or `Spirit`,  
 you can suppress INFO/DEBUG logs and some validations regardless of the compiler flag settings.
 
-### Preserve Spirit class
+#### Preserve Spirit class
 
 At default, a class that implements `Spirit` is excluded from compilation as it is unlikely that it will be used alone.
 
 Add `@:ripper.preserve` metadata to the class to avoid this.
 
-### Caution: Sharing import/using
+#### Caution: Sharing import/using
 
 If any type is used with `import` (or `using`) in a `Spirit` class,
 the module of `Body` class should also import it.
 
 Otherwise you will have "Unresolved identifier" errors.
 
+
+## Usage > Data
+
+By implementing `ripper.Data` interface, the constructor is automatically completed.
+
+For example, this:
+
+```haxe
+class MyData implements ripper.Data {
+	public final a: Int;
+	public final b: Float;
+	public final c: String;
+	public final d: Int = 0; // Will be ignored as already initialized
+}
+```
+
+compiles to:
+
+```haxe
+class MyData implements ripper.Data {
+	public final a: Int;
+	public final b: Float;
+	public final c: String;
+	public final d: Int = 0;
+
+	public function new(a: Int, b: Float, c: String) {
+		this.a = a;
+		this.b = b;
+		this.c = c;
+	}
+}
+```
 
 ## Compiler flags
 
