@@ -8,7 +8,7 @@ A small library to help you create classes.
 
 ## Features
 
-### Partial implementation
+### Partial Implementation
 
 Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
 
@@ -16,7 +16,7 @@ Inspired by [hamaluik/haxe-partials](https://github.com/hamaluik/haxe-partials).
 
 What it does is just copying fields from a class to another, using the `@:autoBuild` macro.
 
-### Data class
+### Data Class
 
 Completes the constructor of any class according to non-initialized variables.
 
@@ -38,7 +38,7 @@ Similar to [this](https://code.haxe.org/category/macros/build-value-objects.html
 - Developed within a few days and haven't considered many usecases yet
 
 
-## Usage > Body & Spirit
+## Usage > Partial Implementation
 
 ### "Spirit", from which the fields are copied
 
@@ -151,7 +151,7 @@ the module of `Body` class should also import it.
 Otherwise you will have "Unresolved identifier" errors.
 
 
-## Usage > Data
+## Usage > Data Class
 
 By implementing `ripper.Data` interface, the constructor is automatically completed.
 
