@@ -5,6 +5,7 @@ using sneaker.format.StringExtension;
 using sneaker.macro.extensions.TypeExtension;
 
 import haxe.macro.Context;
+import haxe.macro.Type;
 import sneaker.macro.ContextTools.tryGetModule;
 
 class ContextTools {
@@ -15,7 +16,7 @@ class ContextTools {
 	public static function findClassyTypeIn(
 		module: MacroModule,
 		classPath: String
-	): Null<MacroType> {
+	): Null<Type> {
 		for (type in module)
 			if (type.isClassWithName(classPath)) return type;
 
@@ -26,8 +27,8 @@ class ContextTools {
 		Tries to resolve the module, then finds class in that module.
 		@return Class instance as `haxe.macro.Type`. `null` if not found.
 	**/
-	public static function findClassyTypeOrSubType(classPath: String): Null<MacroType> {
-		var found: Null<MacroType> = null;
+	public static function findClassyTypeOrSubType(classPath: String): Null<Type> {
+		var found: Null<Type> = null;
 
 		var module: Null<MacroModule> = null;
 		module = tryGetModule(classPath);
@@ -72,7 +73,7 @@ class ContextTools {
 		(only the classes that are in the current package or any of its sub-packages can be found).
 		@return Class instance as `haxe.macro.Type`. `null` if not found.
 	**/
-	public static function findClassyType(classPath: String): Null<MacroType> {
+	public static function findClassyType(classPath: String): Null<Type> {
 		if (notVerified) debug("Resolving module...");
 
 		final type = findClassyTypeOrSubType(classPath);

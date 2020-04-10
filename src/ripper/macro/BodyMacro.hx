@@ -7,7 +7,7 @@ using sneaker.macro.extensions.ClassTypeExtension;
 using ripper.macro.utility.ClassTypeExtension;
 
 import haxe.macro.ExprTools;
-import haxe.macro.Type.ClassType;
+import haxe.macro.Type;
 import ripper.macro.utility.ContextTools;
 	#if !ripper_validation_disable
 	import ripper.macro.utility.ExprExtension.validateDomainName;
@@ -60,7 +60,7 @@ class BodyMacro {
 		Extract the class instance from `type`.
 		This process is necessary for invoking the build macro of `type` if not yet called.
 	**/
-	static function resolveClass(type: MacroType, typeName: String): Null<ClassType> {
+	static function resolveClass(type: Type, typeName: String): Null<ClassType> {
 		var classType: Null<ClassType>;
 		try {
 			classType = TypeTools.getClass(type);
