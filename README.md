@@ -226,9 +226,9 @@ If `500` or more (this will include all DEBUG logs), for example:
 
 ## Dependencies
 
-- [sinker](https://github.com/fal-works/sinker) (v0.1.0)
-- [prayer](https://github.com/fal-works/prayer) (v0.1.0)
-- [sneaker](https://github.com/fal-works/sneaker) (v0.8.1)
+- [sinker](https://github.com/fal-works/sinker) v0.1.0
+- [prayer](https://github.com/fal-works/prayer) v0.1.0
+- [sneaker](https://github.com/fal-works/sneaker) v0.8.1
 
 See also:
 [FAL Haxe libraries](https://github.com/fal-works/fal-haxe-libraries)
