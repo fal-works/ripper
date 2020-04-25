@@ -188,16 +188,8 @@ class MyData implements ripper.Data {
 |library|flag|description|
 |---|---|---|
 |ripper|ripper_validation_disable|Disables all validation during the compilation.|
-|sneaker|sneaker_macro_log_level|Less than 300 for hiding log including WARN. 500 or more for showing all logs.|
+|sneaker|sneaker_macro_log_level|Less than 300 for hiding WARN/INFO/DEBUG logs. 500 or more for showing all logs.|
 |sneaker|sneaker_macro_message_level|Similar to above, but related to compiler messages. Not related to DEBUG logs.|
-
-### Disabling validation/log
-
-If you are sure that your code works fine and doesn't need warning messages,  
-you might want to disable all debugging features with following flags:
-
-- Setting `ripper_validation_disable`
-- Low values (less than `300`) for `sneaker_macro_log_level` and `sneaker_macro_message_level`
 
 ### Debug logs
 
