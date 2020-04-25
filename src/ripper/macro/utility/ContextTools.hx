@@ -1,12 +1,9 @@
 package ripper.macro.utility;
 
 #if macro
-using sneaker.format.StringExtension;
-using sneaker.macro.extensions.TypeExtension;
-
 import haxe.macro.Context;
 import haxe.macro.Type;
-import sneaker.macro.ContextTools.tryGetModule;
+import prayer.ContextTools.tryGetModule;
 
 class ContextTools {
 	/**
@@ -14,7 +11,7 @@ class ContextTools {
 		@return Class instance as `haxe.macro.Type`. `null` if not found.
 	**/
 	public static function findClassyTypeIn(
-		module: MacroModule,
+		module: Array<Type>,
 		classPath: String
 	): Null<Type> {
 		for (type in module)
@@ -30,7 +27,7 @@ class ContextTools {
 	public static function findClassyTypeOrSubType(classPath: String): Null<Type> {
 		var found: Null<Type> = null;
 
-		var module: Null<MacroModule> = null;
+		var module: Null<Array<Type>> = null;
 		module = tryGetModule(classPath);
 
 		if (module != null) {
@@ -45,7 +42,7 @@ class ContextTools {
 			if (notVerified) debug('  ${classPath} => Not found.');
 		}
 
-		final lastDotIndex = classPath.lastIndexOfDot();
+		final lastDotIndex = classPath.getLastIndexOfDot().int();
 		final beforeLastDot = classPath.substr(0, lastDotIndex);
 		module = tryGetModule(beforeLastDot);
 
@@ -53,7 +50,7 @@ class ContextTools {
 			// classPath = modulePath.subClassName
 			if (notVerified) debug('  ${beforeLastDot} => Found.');
 
-			final secondLastDotIndex = beforeLastDot.lastIndexOfDot();
+			final secondLastDotIndex = beforeLastDot.getLastIndexOfDot().int();
 			final beforeSecondDot = beforeLastDot.substr(0, secondLastDotIndex);
 			final subclassPath = beforeSecondDot + classPath.substr(lastDotIndex);
 			found = findClassyTypeIn(module, subclassPath);
@@ -80,10 +77,10 @@ class ContextTools {
 		if (type != null) return type;
 
 		final localModulePath = Context.getLocalModule();
-		final lastDotIndex = localModulePath.lastIndexOfDot();
-		if (lastDotIndex < 0) return null; // Already in root package
+		final lastDotIndex = localModulePath.getLastIndexOfDot();
+		if (lastDotIndex.isNone()) return null; // Already in root package
 
-		final localPackagePath = localModulePath.substr(0, lastDotIndex);
+		final localPackagePath = localModulePath.substr(0, lastDotIndex.unwrap());
 		return findClassyTypeOrSubType('${localPackagePath}.${classPath}');
 	}
 }

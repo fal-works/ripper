@@ -37,7 +37,7 @@ class SpiritMacro {
 			return null;
 		}
 
-		final localTypePath = TypeTools.toString(localType);
+		final localTypePath = localType.toString();
 
 		final localFields = Context.getBuildFields();
 		fieldsMap.set(localTypePath, localFields);

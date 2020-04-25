@@ -3,10 +3,7 @@ package ripper.macro;
 #if macro
 using Lambda;
 using haxe.macro.TypeTools;
-using sneaker.macro.extensions.ClassTypeExtension;
-
-import sneaker.macro.ContextTools;
-import sneaker.macro.extensions.FieldExtension;
+using sneaker.macro.extensions.MacroResultExtension;
 
 class DataMacro {
 	/**
@@ -46,7 +43,7 @@ class DataMacro {
 			}
 		}
 
-		final existingConstructor = buildFields.find(FieldExtension.isNew);
+		final existingConstructor = buildFields.findByName("new");
 		if (existingConstructor != null) {
 			if (notVerified) debug('Found an existing constructor.');
 			buildFields.remove(existingConstructor);

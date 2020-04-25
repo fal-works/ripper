@@ -226,4 +226,6 @@ If `500` or more (this will include all DEBUG logs), for example:
 
 ## Dependencies
 
-- [sneaker](https://github.com/fal-works/sneaker) (v0.8.1) for logging and string/macro utilities
+- [sinker](https://github.com/fal-works/sinker) (v0.1.0)
+- [prayer](https://github.com/fal-works/prayer) (v0.1.0)
+- [sneaker](https://github.com/fal-works/sneaker) (v0.8.1)

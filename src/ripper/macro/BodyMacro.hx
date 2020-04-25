@@ -1,9 +1,6 @@
 package ripper.macro;
 
 #if macro
-using sneaker.format.StringExtension;
-using sneaker.macro.extensions.FieldExtension;
-using sneaker.macro.extensions.ClassTypeExtension;
 using ripper.macro.utility.ClassTypeExtension;
 
 import haxe.macro.ExprTools;
@@ -63,7 +60,7 @@ class BodyMacro {
 	static function resolveClass(type: Type, typeName: String): Null<ClassType> {
 		var classType: Null<ClassType>;
 		try {
-			classType = TypeTools.getClass(type);
+			classType = type.getClass();
 		} catch (e:Dynamic) {
 			classType = null;
 		}
@@ -108,7 +105,7 @@ class BodyMacro {
 		if (type == null) return NotFound;
 		#end
 
-		final fullTypeName = TypeTools.toString(type);
+		final fullTypeName = type.toString();
 		if (notVerified) {
 			debug('Found type: ${fullTypeName}');
 			debug('Resolving as a class.');

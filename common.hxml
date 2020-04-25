@@ -5,8 +5,13 @@
 
 -dce full
 --macro nullSafety("ripper", Strict)
+
+-lib sinker
+-lib prayer
 -lib sneaker
+
 -main Test
 
+-D sinker_debug
 # -D ripper_validation_disable
 # -D sneaker_macro_log_level=500

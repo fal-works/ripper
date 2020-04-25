@@ -28,7 +28,7 @@ class ExprExtension {
 		@return `true` if `a` and `b` are deeply equal.
 	**/
 	public static function equalImport(a: ImportExpr, b: ImportExpr): Bool {
-		if (!Type.enumEq(a.mode, b.mode)) return false;
+		if (!std.Type.enumEq(a.mode, b.mode)) return false;
 
 		final pathA = a.path;
 		final pathB = b.path;
