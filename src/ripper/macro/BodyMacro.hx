@@ -199,9 +199,9 @@ class BodyMacro {
 					case Success:
 						if (notVerified) {
 							#if !ripper_validation_disable
-							info('Copied fields: ${localClassName.sliceAfterLastDot()} <= ${typeName.sliceAfterLastDot()}');
+							debug('Copied fields: ${localClassName.sliceAfterLastDot()} <= ${typeName.sliceAfterLastDot()}');
 							#else
-							info('Processed metadata parameter: ${typeName}');
+							debug('Processed metadata parameter: ${typeName}');
 							#end
 						}
 				}
