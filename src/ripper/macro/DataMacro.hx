@@ -1,6 +1,8 @@
 package ripper.macro;
 
 #if macro
+import prayer.Values.nullField;
+
 using Lambda;
 using haxe.macro.TypeTools;
 using sneaker.macro.extensions.MacroResultExtension;
@@ -44,7 +46,7 @@ class DataMacro {
 		}
 
 		final existingConstructor = buildFields.findByName("new");
-		if (existingConstructor != null) {
+		if (existingConstructor != nullField) {
 			if (notVerified) debug('Found an existing constructor.');
 			buildFields.remove(existingConstructor);
 			switch (existingConstructor.kind) {
@@ -60,7 +62,12 @@ class DataMacro {
 				default:
 			}
 		} else {
-			if (notVerified) debug('Create a new constructor.');
+			if (notVerified) {
+				debug('Create a new constructor.');
+
+				if (localClass.superClass != null)
+					warn("Super constructor should be called explicitly.");
+			}
 		}
 
 		final constructor: Field = {
