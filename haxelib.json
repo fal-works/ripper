@@ -4,15 +4,15 @@
 	"license": "MIT",
 	"tags": ["utility", "macro"],
 	"description": "A small library to help you create classes (more specifically: helps partial implementation and data class building).",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"classPath": "src/",
-	"releasenote": "Small fixes.",
+	"releasenote": "Update library dependencies.",
 	"contributors": [
 		"fal-works"
 	],
 	"dependencies": {
-		"sinker": "0.2.0",
-		"prayer": "0.1.2",
-		"sneaker": "0.9.1"
+		"sinker": "",
+		"prayer": "",
+		"sneaker": ""
 	}
 }
