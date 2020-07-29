@@ -17,6 +17,9 @@ class Constants {
 	public static final preserveMetadataName = ":ripper.preserve";
 	public static final preserveMetadataName_ = ":ripper_preserve";
 
+	public static final callSuperMetadataName = ":ripper.callSuper";
+	public static final callSuperMetadataName_ = ":ripper_callSuper";
+
 	public static final spiritInterfaceName = "ripper.Spirit";
 }
 #end

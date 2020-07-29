@@ -183,6 +183,13 @@ class MyData implements ripper.Data {
 }
 ```
 
+### `super()` injection
+
+If you add metadata `@:ripper.callSuper` to your data class, a super constructor call without arguments (`super()`) is automatically injected.
+
+This is only available if the super constructor has no mandatory arguments; otherwise you have to declare `new()` and call `super(args)` manually.
+
+
 ## Compiler flags
 
 |library|flag|description|

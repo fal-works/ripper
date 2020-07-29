@@ -30,6 +30,18 @@ class DataMacro {
 		var documentation: Null<String> = 'Creates `${localClass.name}` instance.';
 		var metadata: Null<Metadata> = null;
 
+		final meta = localClass.meta;
+		final callSuper = localClass.superClass != null
+			&& (meta.has(callSuperMetadataName) || meta.has(callSuperMetadataName_));
+		if (callSuper) {
+			if (notVerified) {
+				debug('Found metadata: $callSuperMetadataName');
+				debug('  Inject super constructor call without arguments.');
+			}
+
+			expressions.push(macro super());
+		}
+
 		if (notVerified) debug('Scan non-initialized variables.');
 		for (field in buildFields) {
 			switch (field.kind) {
@@ -62,12 +74,7 @@ class DataMacro {
 				default:
 			}
 		} else {
-			if (notVerified) {
-				debug('Create a new constructor.');
-
-				if (localClass.superClass != null)
-					warn("Super constructor should be called explicitly.");
-			}
+			if (notVerified) debug('Create a new constructor.');
 		}
 
 		final constructor: Field = {
