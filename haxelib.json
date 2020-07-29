@@ -3,10 +3,10 @@
 	"url": "https://github.com/fal-works/ripper/",
 	"license": "MIT",
 	"tags": ["utility", "macro"],
-	"description": "A small library to help you create classes (more specifically: helps partial implementation and data class building).",
-	"version": "0.3.3",
+	"description": "A small library to help you create classes (helps partial implementation and data class building).",
+	"version": "0.4.0-alpha",
 	"classPath": "src/",
-	"releasenote": "Update library dependencies.",
+	"releasenote": "Improved constructor completion in Data classes.",
 	"contributors": [
 		"fal-works"
 	],
