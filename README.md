@@ -3,7 +3,7 @@
 A small library to help you create classes.
 
 
-**Requires Haxe 4** (tested with v4.0.5).
+**Requires Haxe 4**.
 
 
 ## Features
